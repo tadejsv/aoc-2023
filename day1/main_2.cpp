@@ -6,6 +6,19 @@
 #include <unordered_map>
 #include <vector>
 
+auto find_digit(std::string str, int start, int end, int substr_length,
+                std::unordered_map<std::string, int> digit_map) -> int {
+    if (end - start + 1 >= substr_length) {
+        auto substr = str.substr(end - substr_length + 1, substr_length);
+        std::cout << substr << std::endl;
+        auto num_ret = digit_map.find(substr);
+        if (num_ret != digit_map.end()) {
+            return num_ret->second;
+        }
+    }
+    return -1;
+};
+
 // This function takes a file where lines contain a mix of numeric and alphabet
 // characters, among which could also be words for the numbers up to 10 (zero,
 // one, ..., nine). An example of such line is "asbone2asnine2". It parses the
@@ -43,39 +56,55 @@ auto main() -> int {
     std::vector<std::array<int, 2>> line_numbers{};
 
     std::string line;
-    int digit{};
-    int last_digit_pos{0};
     while (getline(file, line)) {
-        bool gotFirst{false};
         std::array<int, 2> numbers{};
+        bool gotFirst{false};
+        int last_digit_pos{0};
 
-        for (size_t i = 1; i <= line.size(); ++i) {
-            std::cout << line.at(i);
-            continue;
-            // if (bool(isdigit(line.at(i)))) {
-            //     digit = chr - '0';
-            // } else {
-            // }
+        for (size_t i = 0; i < line.length(); ++i) {
+            int digit{-1};
+            auto chr = line.at(i);
 
-            // if (digit >= 0) {
-            //     if (gotFirst) {
-            //         numbers[1] = digit;
-            //     } else {
-            //         numbers[0] = digit;
-            //         numbers[1] = digit;
-            //         gotFirst = true;
-            //     }
-            // }
+            if (bool(isdigit(chr))) {
+                digit = chr - '0';
+                last_digit_pos = i;
+            } else {
+                if (auto three_digit = find_digit(line, last_digit_pos, i, 3,
+                                                  three_letter_nums);
+                    three_digit >= 0) {
+                    digit = three_digit;
+                }
+                if (auto four_digit = find_digit(line, last_digit_pos, i, 4,
+                                                 four_letter_nums);
+                    four_digit >= 0) {
+                    digit = four_digit;
+                }
+                if (auto five_digit = find_digit(line, last_digit_pos, i, 5,
+                                                 five_letter_nums);
+                    five_digit >= 0) {
+                    digit = five_digit;
+                }
+            }
+
+            if (digit >= 0) {
+                if (gotFirst) {
+                    numbers[1] = digit;
+                } else {
+                    numbers[0] = digit;
+                    numbers[1] = digit;
+                    gotFirst = true;
+                }
+            }
         }
-
-        // line_numbers.push_back(numbers);
+        std::cout << numbers[0] << " " << numbers[1] << "\n";
+        line_numbers.push_back(numbers);
     }
 
-    // int total{0};
-    // for (const auto &nums : line_numbers) {
-    //     total += 10 * nums[0] + nums[1];
-    // }
+    int total{0};
+    for (const auto &nums : line_numbers) {
+        total += 10 * nums[0] + nums[1];
+    }
 
-    // std::cout << total;
+    std::cout << total;
     return 0;
 }
