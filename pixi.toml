@@ -1,0 +1,23 @@
+[project]
+name = "aoc-2023"
+version = "0.1.0"
+description = "Add a short description here"
+authors = ["Tadej <tadej.svetina@gmail.com>"]
+channels = ["conda-forge"]
+platforms = ["linux-64"]
+
+[tasks]
+
+[dependencies]
+Ninja = "1.11.1.*"
+gdb = "12.1.*"
+clang-tools = "17.0.6.*"
+include-what-you-use = "0.21.*"
+cmake = "3.27.9.*"
+clangxx = "17.0.6.*"
+libcxx = "16.0.6.*"
+lld = "17.0.6.*"
+libunwind = "1.6.2.*"
+
+[activation]
+scripts = ["env_setup.sh"]

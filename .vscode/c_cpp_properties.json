@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "cStandard": "c17",
+            "intelliSenseMode": "linux-clang-x86",
+            "configurationProvider": "ms-vscode.cmake-tools",
+            "cppStandard": "c++20",
+            "compilerPath": "/home/tadej/projects/aoc-2023/.pixi/env/bin/clang++"
+        }
+    ],
+    "version": 4
+}
