@@ -13,11 +13,12 @@ Ninja = "1.11.1.*"
 gdb = "12.1.*"
 clang-tools = "17.0.6.*"
 include-what-you-use = "0.21.*"
-cmake = "3.27.9.*"
+cmake = "3.28.0.*"
 clangxx = "17.0.6.*"
 libcxx = "16.0.6.*"
 lld = "17.0.6.*"
 libunwind = "1.6.2.*"
+llvm-tools = "17.0.6.*"
 
 [activation]
 scripts = ["env_setup.sh"]

@@ -270,12 +270,12 @@ package:
   timestamp: 1701417995478
 - platform: linux-64
   name: cmake
-  version: 3.27.9
+  version: 3.28.0
   category: main
   manager: conda
   dependencies:
   - bzip2 >=1.0.8,<2.0a0
-  - libcurl >=8.4.0,<9.0a0
+  - libcurl >=8.5.0,<9.0a0
   - libexpat >=2.5.0,<3.0a0
   - libgcc-ng >=12
   - libstdcxx-ng >=12
@@ -285,18 +285,18 @@ package:
   - rhash >=1.4.4,<2.0a0
   - xz >=5.2.6,<6.0a0
   - zstd >=1.5.5,<1.6.0a0
-  url: https://conda.anaconda.org/conda-forge/linux-64/cmake-3.27.9-hcfe8598_0.conda
+  url: https://conda.anaconda.org/conda-forge/linux-64/cmake-3.28.0-hcfe8598_0.conda
   hash:
-    md5: 6348d63963b05416c3d2e87462e0b9f8
-    sha256: 2c1b765df865447eff9803dcae06c58e30298010d6fd5119c53b2689c822ad15
+    md5: e73d07dbc9033e983232c4c304affa32
+    sha256: b6cca51f8f86ad8b147232ac66f28de54473914a8487f0616d4d546b35a92f26
   build: hcfe8598_0
   arch: x86_64
   subdir: linux-64
   build_number: 0
   license: BSD-3-Clause
   license_family: BSD
-  size: 18449514
-  timestamp: 1701198188702
+  size: 18718611
+  timestamp: 1701935192850
 - platform: linux-64
   name: gdb
   version: '12.1'
@@ -518,29 +518,29 @@ package:
   timestamp: 1701418039173
 - platform: linux-64
   name: libcurl
-  version: 8.4.0
+  version: 8.5.0
   category: main
   manager: conda
   dependencies:
   - krb5 >=1.21.2,<1.22.0a0
   - libgcc-ng >=12
-  - libnghttp2 >=1.52.0,<2.0a0
+  - libnghttp2 >=1.58.0,<2.0a0
   - libssh2 >=1.11.0,<2.0a0
   - libzlib >=1.2.13,<1.3.0a0
-  - openssl >=3.1.3,<4.0a0
+  - openssl >=3.2.0,<4.0a0
   - zstd >=1.5.5,<1.6.0a0
-  url: https://conda.anaconda.org/conda-forge/linux-64/libcurl-8.4.0-hca28451_0.conda
+  url: https://conda.anaconda.org/conda-forge/linux-64/libcurl-8.5.0-hca28451_0.conda
   hash:
-    md5: 1158ac1d2613b28685644931f11ee807
-    sha256: 25f4b6a8827d7b17a66e0bd9b5d194bf9a9e4a46fb14e2ef472fdad4b39426a6
+    md5: 7144d5a828e2cae218e0e3c98d8a0aeb
+    sha256: 00a6bea5ff90ca58eeb15ebc98e08ffb88bddaff27396bb62640064f59d29cf0
   build: hca28451_0
   arch: x86_64
   subdir: linux-64
   build_number: 0
   license: curl
   license_family: MIT
-  size: 386160
-  timestamp: 1697009208544
+  size: 389164
+  timestamp: 1701860147844
 - platform: linux-64
   name: libcxx
   version: 16.0.6
@@ -1048,6 +1048,35 @@ package:
   license_family: APACHE
   size: 6906997
   timestamp: 1701230187542
+- platform: linux-64
+  name: llvm-tools
+  version: 17.0.6
+  category: main
+  manager: conda
+  dependencies:
+  - libgcc-ng >=12
+  - libllvm17 17.0.6 hb3ce162_1
+  - libstdcxx-ng >=12
+  - libxml2 >=2.12.1,<2.13.0a0
+  - libzlib >=1.2.13,<1.3.0a0
+  - zstd >=1.5.5,<1.6.0a0
+  url: https://conda.anaconda.org/conda-forge/linux-64/llvm-tools-17.0.6-hb3ce162_1.conda
+  hash:
+    md5: 909063622a7351a96217654e82058566
+    sha256: e29a63a9ed1f6ea1a85dcb1dce896dd3fdc4efa1a54f4b1c57a3920721fc8928
+  build: hb3ce162_1
+  arch: x86_64
+  subdir: linux-64
+  build_number: 1
+  constrains:
+  - llvmdev     17.0.6
+  - clang-tools 17.0.6
+  - clang       17.0.6
+  - llvm        17.0.6
+  license: Apache-2.0 WITH LLVM-exception
+  license_family: Apache
+  size: 30776108
+  timestamp: 1701374373582
 - platform: linux-64
   name: ncurses
   version: '6.4'

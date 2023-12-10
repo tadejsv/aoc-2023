@@ -69,18 +69,18 @@ auto main() -> int {
                 digit = chr - '0';
                 last_digit_pos = i;
             } else {
-                if (auto three_digit = find_digit(line, last_digit_pos, i, 3,
-                                                  three_letter_nums);
+                if (auto three_digit =
+                        find_digit(line, last_digit_pos, i, 3, three_letter_nums);
                     three_digit >= 0) {
                     digit = three_digit;
                 }
-                if (auto four_digit = find_digit(line, last_digit_pos, i, 4,
-                                                 four_letter_nums);
+                if (auto four_digit =
+                        find_digit(line, last_digit_pos, i, 4, four_letter_nums);
                     four_digit >= 0) {
                     digit = four_digit;
                 }
-                if (auto five_digit = find_digit(line, last_digit_pos, i, 5,
-                                                 five_letter_nums);
+                if (auto five_digit =
+                        find_digit(line, last_digit_pos, i, 5, five_letter_nums);
                     five_digit >= 0) {
                     digit = five_digit;
                 }

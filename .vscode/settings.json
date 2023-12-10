@@ -79,8 +79,29 @@
         "utility": "cpp",
         "format": "cpp",
         "stop_token": "cpp",
-        "codecvt": "cpp"
+        "codecvt": "cpp",
+        "__tree": "cpp",
+        "forward_list": "cpp",
+        "list": "cpp",
+        "map": "cpp",
+        "regex": "cpp",
+        "scoped_allocator": "cpp",
+        "set": "cpp",
+        "unordered_set": "cpp",
+        "rope": "cpp",
+        "slist": "cpp",
+        "stacktrace": "cpp"
     },
     "cmake.configureOnOpen": true,
-    "C_Cpp.default.compilerPath": "/home/tadej/projects/aoc-2023/.pixi/env/bin/clang++"
+    "C_Cpp.default.compilerPath": "/home/tadej/projects/aoc-2023/.pixi/env/bin/clang++",
+    "cmake.configureArgs": [
+        "-DCMAKE_C_COMPILER=/home/tadej/projects/aoc-2023/.pixi/env/bin/clang",
+        "-DCMAKE_CXX_COMPILER=/home/tadej/projects/aoc-2023/.pixi/env/bin/clang++",
+        "-DCMAKE_CXX_FLAGS=\"-fuse-ld=/home/tadej/projects/aoc-2023/.pixi/env/bin/ld.lld\"",
+		"-DCMAKE_AR=/home/tadej/projects/aoc-2023/.pixi/env/bin/llvm-ar",
+		"-DCMAKE_RANLIB=/home/tadej/projects/aoc-2023/.pixi/env/bin/llvm-ranlib"
+    ],
+    "cmake.configureEnvironment": {
+        "LDFLAGS": "-Wl,-rpath,/home/tadej/projects/aoc-2023/.pixi/env/lib -Wl,-rpath-link,/home/tadej/projects/aoc-2023/.pixi/env/lib -L/home/tadej/projects/aoc-2023/.pixi/env/lib"
+    }
 }

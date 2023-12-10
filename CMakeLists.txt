@@ -15,4 +15,7 @@ target_compile_features(compiler_flags INTERFACE cxx_std_20)
 target_compile_options(compiler_flags INTERFACE -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -stdlib=libc++)
 target_link_options(compiler_flags INTERFACE -stdlib=libc++)
 
+add_subdirectory(utils)
+
 add_subdirectory(day1)
+add_subdirectory(day2)
