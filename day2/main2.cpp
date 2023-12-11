@@ -1,9 +1,9 @@
-#include "utils/utils.h"
-
-#include <algorithm>
 #include <iostream>
+#include <unordered_map>
 #include <string>
 #include <vector>
+
+#include "utils/utils.h"
 
 struct GameMax {
     int red;
