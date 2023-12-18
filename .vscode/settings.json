@@ -90,7 +90,8 @@
         "unordered_set": "cpp",
         "rope": "cpp",
         "slist": "cpp",
-        "stacktrace": "cpp"
+        "stacktrace": "cpp",
+        "future": "cpp"
     },
     "cmake.configureOnOpen": true,
     "C_Cpp.default.compilerPath": "/home/tadej/projects/aoc-2023/.pixi/env/bin/clang++",

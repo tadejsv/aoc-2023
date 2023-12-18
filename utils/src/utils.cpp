@@ -1,5 +1,6 @@
 #include "utils/utils.h"
 
+#include <chrono>
 #include <filesystem> // for path
 #include <fstream>    // IWYU pragma: keep
 #include <iostream>
@@ -47,4 +48,10 @@ auto read_lines_from_file(std::string_view fname) -> std::vector<std::string> {
 
     return lines;
 }
+
+auto Timer::reset() -> void { m_beg = Clock::now(); };
+
+auto Timer::elapsed() const -> double {
+    return std::chrono::duration_cast<Second>(Clock::now() - m_beg).count();
+};
 } // namespace utils
