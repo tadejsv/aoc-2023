@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.27)
+cmake_minimum_required(VERSION 3.28)
 
 project(AOC2023
     VERSION 1.0
@@ -16,3 +16,4 @@ add_subdirectory(utils)
 add_subdirectory(day3)
 add_subdirectory(day4)
 add_subdirectory(day5)
+add_subdirectory(day6)
