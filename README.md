@@ -1,3 +1,7 @@
+TODO:
+* Learn about generator tests, and implement some
+* CI/CD: linting, testing (+ build). WOuld be great to later also add building (a completely static executable)
+
 ## Build and install external dependencies
 
 This project uses 2 external dependencies: `Eigen` (for matrices) and `Catch2`.
