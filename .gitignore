@@ -2,3 +2,5 @@
 .pixi
 
 build/
+external/installed
+Testing/

@@ -128,6 +128,24 @@ package:
   size: 154117
   timestamp: 1700280881924
 - platform: linux-64
+  name: catch2
+  version: 3.4.0
+  category: main
+  manager: conda
+  dependencies:
+  - libgcc-ng >=12
+  url: https://conda.anaconda.org/conda-forge/linux-64/catch2-3.4.0-h00ab1b0_0.conda
+  hash:
+    md5: a1754ce72bb059a521a6c9644b4e6bdf
+    sha256: 35760560f568e28799419eaeb681b31c4f8fe919c0842c568834351677a4362f
+  build: h00ab1b0_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: BSL-1.0
+  size: 616467
+  timestamp: 1689256051291
+- platform: linux-64
   name: clang
   version: 17.0.6
   category: main
@@ -297,26 +315,6 @@ package:
   license_family: BSD
   size: 18718611
   timestamp: 1701935192850
-- platform: linux-64
-  name: eigen
-  version: 3.4.0
-  category: main
-  manager: conda
-  dependencies:
-  - libgcc-ng >=12
-  - libstdcxx-ng >=12
-  url: https://conda.anaconda.org/conda-forge/linux-64/eigen-3.4.0-h00ab1b0_0.conda
-  hash:
-    md5: b1b879d6d093f55dd40d58b5eb2f0699
-    sha256: 53b15a98aadbe0704479bacaf7a5618fcb32d1577be320630674574241639b34
-  build: h00ab1b0_0
-  arch: x86_64
-  subdir: linux-64
-  build_number: 0
-  license: MPL-2.0
-  license_family: MOZILLA
-  size: 1088433
-  timestamp: 1690272126173
 - platform: linux-64
   name: gdb
   version: '12.1'
@@ -1367,49 +1365,6 @@ package:
   noarch: generic
   size: 117580
   timestamp: 1680041306008
-- platform: linux-64
-  name: xtensor
-  version: 0.24.7
-  category: main
-  manager: conda
-  dependencies:
-  - libgcc-ng >=12
-  - libstdcxx-ng >=12
-  - xtl >=0.7,<0.8
-  url: https://conda.anaconda.org/conda-forge/linux-64/xtensor-0.24.7-h00ab1b0_0.conda
-  hash:
-    md5: d012f51415e875572c5a87b99c89ab94
-    sha256: 2be174241deec5e9bff266578527a9d29d9c75ee4d8ec12373b65315c8cd6d07
-  build: h00ab1b0_0
-  arch: x86_64
-  subdir: linux-64
-  build_number: 0
-  constrains:
-  - xsimd >=10.0.0,<11
-  license: BSD-3-Clause
-  license_family: BSD
-  size: 201911
-  timestamp: 1695065278409
-- platform: linux-64
-  name: xtl
-  version: 0.7.5
-  category: main
-  manager: conda
-  dependencies:
-  - libgcc-ng >=12
-  - libstdcxx-ng >=12
-  url: https://conda.anaconda.org/conda-forge/linux-64/xtl-0.7.5-hf52228f_0.conda
-  hash:
-    md5: 6569d848d6995b2650b7fc126092096e
-    sha256: a06ccbcde2d8971b8d848fa42d521b2f6862b54524786cb61fad448092646942
-  build: hf52228f_0
-  arch: x86_64
-  subdir: linux-64
-  build_number: 0
-  license: BSD-3-Clause
-  license_family: BSD
-  size: 97804
-  timestamp: 1673468726022
 - platform: linux-64
   name: xz
   version: 5.2.6

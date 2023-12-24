@@ -8,6 +8,13 @@ project(AOC2023
 add_library(compiler_flags INTERFACE)
 target_compile_features(compiler_flags INTERFACE cxx_std_23)
 
+# 3rd party dependencies
+find_package(Eigen3 3.4.90 REQUIRED NO_MODULE)
+find_package(Catch2 3.5.0 REQUIRED NO_MODULE)
+
+include(CTest)
+include(Catch)
+
 add_subdirectory(utils)
 
 # Don't want the past to hold me back :)

@@ -99,6 +99,7 @@
     "cmake.configureOnOpen": true,
     "C_Cpp.default.compilerPath": "/home/tadej/projects/aoc-2023/.pixi/env/bin/clang++",
     "cmake.configureArgs": [
-        "-DCMAKE_TOOLCHAIN_FILE=Toolchain.cmake",
+        "-DCMAKE_TOOLCHAIN_FILE=toolchain/Dev.cmake",
+        "-DCMAKE_PREFIX_PATH=external/installed"
     ],
 }
