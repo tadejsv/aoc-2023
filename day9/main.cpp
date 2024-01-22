@@ -34,7 +34,7 @@ int main() { // NOLINT
             numbers.push_back(std::stol(num));
         }
 
-        sum += predict_next_number(numbers) ;
+        sum += predict_next_number(numbers);
     }
 
     std::cout << sum;

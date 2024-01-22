@@ -112,7 +112,10 @@
         "spanstream": "cpp",
         "stdfloat": "cpp",
         "syncstream": "cpp",
-        "typeindex": "cpp"
+        "typeindex": "cpp",
+        "dense": "cpp",
+        "core": "cpp",
+        "specialfunctions": "cpp"
     },
     "cmake.configureOnOpen": true,
     "C_Cpp.default.compilerPath": "/home/tadej/projects/aoc-2023/.pixi/env/bin/clang++",
@@ -120,4 +123,6 @@
         "-DCMAKE_TOOLCHAIN_FILE=toolchain/Dev.cmake",
         "-DCMAKE_PREFIX_PATH=external/installed"
     ],
+    "cmake.cmakePath": "/home/tadej/projects/aoc-2023/.pixi/env/bin/cmake",
+    "C_Cpp.codeAnalysis.runAutomatically": false
 }

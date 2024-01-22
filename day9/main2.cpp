@@ -32,7 +32,7 @@ int main() { // NOLINT
             numbers.push_back(std::stol(num));
         }
 
-        sum += predict_first_number(numbers) ;
+        sum += predict_first_number(numbers);
     }
 
     std::cout << sum;

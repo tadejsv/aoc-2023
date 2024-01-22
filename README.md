@@ -1,6 +1,7 @@
 TODO:
 * Learn about generator tests, and implement some
 * CI/CD: linting, testing (+ build). WOuld be great to later also add building (a completely static executable)
+* Proper error handling and executions
 
 ## Build and install external dependencies
 

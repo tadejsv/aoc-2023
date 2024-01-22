@@ -2,3 +2,5 @@ Checks: clang-diagnostic-*,clang-analyzer-*,-*,bugprone-*,cppcoreguidelines-*,cl
 HeaderFilterRegex: '.*'
 CheckOptions:
     bugprone-exception-escape.IgnoredExceptions: main,
+    readability-identifier-length.IgnoredParameterNames: [x|y]
+    readability-identifier-length.IgnoredVariableNames: [x|y]
