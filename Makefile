@@ -22,10 +22,16 @@ install-catch:
 install-external: install-catch install-eigen
 
 .PHONY: configure
-configure:
-	rm -rf build && \
+configure: clean
 	cmake -G Ninja -S $(SRCDIR) -B $(BUILDDIR) \
 		-DCMAKE_TOOLCHAIN_FILE=toolchain/Dev.cmake \
+		-DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
+		-DCMAKE_PREFIX_PATH=external/installed
+
+.PHONY: configure-ci
+configure-ci: clean
+	cmake -G Ninja -S $(SRCDIR) -B $(BUILDDIR) \
+		-DCMAKE_TOOLCHAIN_FILE=toolchain/CI.cmake \
 		-DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
 		-DCMAKE_PREFIX_PATH=external/installed
 
@@ -35,6 +41,10 @@ build:
 
 .PHONY: build-new
 build-new: configure
+	cmake --build $(BUILDDIR) -v
+
+.PHONY: build-ci
+build-ci: configure-ci
 	cmake --build $(BUILDDIR) -v
 
 .PHONY: clean
@@ -51,7 +61,7 @@ check-format:
 
 .PHONY: lint
 lint:
-	clang-tidy $$( $(FIND_CPP_FILES) ) -p build --enable-check-profile
+	clang-tidy $$( $(FIND_CPP_FILES) ) -p build
 
 .PHONY: test
 test:

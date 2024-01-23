@@ -2,6 +2,7 @@
 #define UTILS_H
 
 #include <chrono>
+#include <ratio>
 #include <string>
 #include <string_view>
 #include <vector>

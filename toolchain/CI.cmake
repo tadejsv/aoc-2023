@@ -1,0 +1,14 @@
+set(PIXI_ENV_ROOT ${CMAKE_CURRENT_LIST_DIR}/../.pixi/env)
+
+set(LINKER_FLAGS -fuse-ld=lld -Wl,-rpath,${PIXI_ENV_ROOT}/lib -Wl,-rpath-link,${PIXI_ENV_ROOT}/lib -L${PIXI_ENV_ROOT}/lib)
+
+set(CMAKE_C_COMPILER ${PIXI_ENV_ROOT}/bin/clang)
+set(CMAKE_CXX_COMPILER ${PIXI_ENV_ROOT}/bin/clang++)
+set(CMAKE_AR ${PIXI_ENV_ROOT}/bin/llvm-ar)
+set(CMAKE_RANLIB ${PIXI_ENV_ROOT}/bin/llvm-ranlib)
+
+set(LINK_WHAT_YOU_USE ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+add_compile_options(-Werror -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -stdlib=libc++)
+add_link_options(${LINKER_FLAGS} -stdlib=libc++)
