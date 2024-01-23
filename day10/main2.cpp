@@ -231,7 +231,8 @@ int main() { // NOLINT
 
     // Vertical right-down pass
     int total_enclosed{0};
-    Eigen::Index x{0}, y{0};
+    Eigen::Index x{0}; 
+    Eigen::Index y{0};
     const auto mhw{std::min(height, width)};
     for (Eigen::Index i{0}; i < width + height; i++) {
         int crossings{0};

@@ -23,7 +23,7 @@ struct Digit {
     std::size_t length;
     std::array<Eigen::Index, 2> index;
 
-    Eigen::Index start_x() const {
+    auto start_x() const -> Eigen::Index {
         return index[1] - static_cast<Eigen::Index>(length) + 1L;
     }
 };

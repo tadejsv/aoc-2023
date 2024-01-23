@@ -30,7 +30,11 @@ configure:
 		-DCMAKE_PREFIX_PATH=external/installed
 
 .PHONY: build
-build: configure
+build:
+	cmake --build $(BUILDDIR) -v
+
+.PHONY: build-new
+build-new: configure
 	cmake --build $(BUILDDIR) -v
 
 .PHONY: clean
@@ -51,4 +55,4 @@ lint:
 
 .PHONY: test
 test:
-	ctest --test-dir build -T test -j10 --output-on-failure
+	ctest -V --test-dir build -T test -j10 --output-on-failure

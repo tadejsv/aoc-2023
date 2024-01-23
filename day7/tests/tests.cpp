@@ -11,16 +11,22 @@ TEST_CASE("Test hand constructor") {
                               std::make_pair("TA1AT", 2), std::make_pair("TA17T", 1),
                               std::make_pair("JA17T", 0));
 
+    CAPTURE(test_case.first, test_case.second);
     REQUIRE(Hand(test_case.first).strength == test_case.second);
 }
 
 TEST_CASE("Test hand comparison") {
-    REQUIRE(compare_hands(Hand("AAAAA"), Hand("22345")) == false);
-    REQUIRE(compare_hands(Hand("AAAAA"), Hand("JJJJJ")) == false);
-    REQUIRE(compare_hands(Hand("32223"), Hand("AAQQK")) == false);
-    REQUIRE(compare_hands(Hand("32223"), Hand("32223")) == false);
-    REQUIRE(compare_hands(Hand("62345"), Hand("AAAAA")) == true);
-    REQUIRE(compare_hands(Hand("JJJJJ"), Hand("AAAAA")) == true);
-    REQUIRE(compare_hands(Hand("AAQQK"), Hand("32223")) == true);
-    REQUIRE(compare_hands(Hand("AJQ32"), Hand("AJQ42")) == true);
+    std::tuple<const char *, const char *, bool> test_case =
+        GENERATE(std::make_tuple("AAAAA", "22345", false),
+                 std::make_tuple("AAAAA", "JJJJJ", false),
+                 std::make_tuple("32223", "AAQQK", false),
+                 std::make_tuple("32223", "32223", false),
+                 std::make_tuple("62345", "AAAAA", true),
+                 std::make_tuple("JJJJJ", "AAAAA", true),
+                 std::make_tuple("AAQQK", "32223", true),
+                 std::make_tuple("AJQ32", "AJQ42", true));
+
+    CAPTURE(std::get<0>(test_case), std::get<1>(test_case), std::get<2>(test_case));
+    REQUIRE(compare_hands(Hand(std::get<0>(test_case)), Hand(std::get<1>(test_case))) ==
+            std::get<2>(test_case));
 }
