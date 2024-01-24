@@ -61,7 +61,7 @@ check-format:
 
 .PHONY: lint
 lint:
-	clang-tidy $$( $(FIND_CPP_FILES) ) -p build
+	clang-tidy -p build $$( $(FIND_CPP_FILES) )
 
 .PHONY: test
 test:

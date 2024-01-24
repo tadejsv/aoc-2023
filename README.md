@@ -1,6 +1,5 @@
 TODO:
-* Learn about generator tests, and implement some
-* CI/CD: linting, testing (+ build). WOuld be great to later also add building (a completely static executable)
+* Try out Clangd instead of intellisense
 * Proper error handling and executions
 
 ## Build and install external dependencies
@@ -33,3 +32,63 @@ However, for compiled libraries, like `Catch2`, this would fail. This is because
 ### Why not use `FetchContent` or `add_subdirectory`?
 
 This option would build the external libraries together with our executables - unlike with `pixi`-installed libraries, this would work, but the downside is that we would get a lot of warnings from our linter for these external libraries, and we would need to re-build the libraries every time we want to build form scratch (deleting the `build/` directory), which would significantly increase the build times.
+
+## Compiling
+
+To compile from scratch, run
+
+```
+make build-new
+```
+
+this will delete the `build/` directory, configure CMake and finally run CMake build step.
+
+To build only binaries for changed code, run
+
+```
+make build
+```
+
+this simply runs the CMake build step, which will not re-build parts that have no changed code.
+
+## Testing
+
+You can run all tests with
+
+```
+make test
+```
+
+This should be done after the build step.
+
+## Linting
+
+If you use `make build` or `make build-new`, CMake will run `clang-tidy` and `iwyu` alongside your build step,
+so the build output will include any lint warnings as well.
+
+You can run linting separately as well (after your build step), using
+
+```
+make lint
+```
+
+### Linting in CI
+
+In CI, we don't use linting, as it is very very slow (5+ minutes, all because of system headers).
+
+One option would be to try with `clangd`'s implementation of `clang-tidy`, as it supposedly skips system
+headers by default (although it does disable a few `clang-tidy` checks).
+
+## Formatting
+
+To format using `clang-format`, use
+
+```
+make format
+```
+
+You can also check that formatting is correct using
+
+```
+make check-format
+```

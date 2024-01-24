@@ -101,7 +101,7 @@ int main() { // NOLINT
 
         for (auto i = std::max(gear[0] - 1L, 0L);
              i <= std::min(gear[0] + 1L, num_lines); i++) {
-            auto const &line_digits = digits[i];
+            auto const &line_digits = digits[static_cast<std::size_t>(i)];
             for (auto const &digit : line_digits) {
                 if (interval_intersect(digit.start_x(), digit.index[1], gear[1] - 1L,
                                        gear[1] + 1L)) {
