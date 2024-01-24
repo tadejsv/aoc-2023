@@ -27,7 +27,7 @@ jobs:
         shell: pixi run bash {0}
 
       - name: Build
-        run: make build-new
+        run: make build-ci
         shell: pixi run bash {0}
 
       - name: Test

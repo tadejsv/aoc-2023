@@ -1,5 +1,6 @@
 Checks: clang-diagnostic-*,clang-analyzer-*,-*,bugprone-*,cppcoreguidelines-*,clang-analyzer-*,modernize-*,readability-*,performance-*
-HeaderFilterRegex: '.*'
+HeaderFilterRegex: 'day4/*'
+SystemHeaders: false
 CheckOptions:
     bugprone-exception-escape.IgnoredExceptions: main,
     readability-identifier-length.IgnoredParameterNames: "[x|y]"

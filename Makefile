@@ -2,7 +2,7 @@
 SRCDIR := .
 BUILDDIR := build
 
-FIND_CPP_FILES := find . \( -path './.*' -o -path './build*' -o -path './external*' \) -prune -o -type f \( -name '*.cpp' -o -name '*.h' \) -print
+FIND_CPP_FILES := find . -type d \( -path './.*' -o -path './build*' -o -path './external*' \) -prune -o -type f \( -name '*.cpp' -o -name '*.h' \) -print
 
 .PHONY: install-eigen
 install-eigen:
