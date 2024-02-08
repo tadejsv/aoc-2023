@@ -45,6 +45,10 @@ jobs:
         run: make install-external
         shell: pixi run bash {0}
 
+      - name: Build
+        run: make configure-ci
+        shell: pixi run bash {0}
+
       - name: Check formatting
         run: make check-format
         shell: pixi run bash {0}
