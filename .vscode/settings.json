@@ -124,5 +124,7 @@
         "-DCMAKE_PREFIX_PATH=external/installed"
     ],
     "cmake.cmakePath": "/home/tadej/projects/aoc-2023/.pixi/env/bin/cmake",
-    "C_Cpp.codeAnalysis.runAutomatically": false
+    "C_Cpp.codeAnalysis.runAutomatically": false,
+    "clangd.path": "/home/tadej/projects/aoc-2023/.pixi/env/bin/clangd",
+    "clangd.inactiveRegions.useBackgroundHighlight": false
 }

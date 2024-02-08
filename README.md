@@ -1,5 +1,7 @@
 TODO:
-* Try out Clangd instead of intellisense
+* Use `just` instead of make, drop the cmake extension, use only `just` and clangd
+* Use CMake presets (you can take out common things from toolchain files)
+  * Look into "general" and user files, also how they interact with toolchains
 * Proper error handling and executions
 
 ## Build and install external dependencies
@@ -63,8 +65,9 @@ This should be done after the build step.
 
 ## Linting
 
-If you use `make build` or `make build-new`, CMake will run `clang-tidy` and `iwyu` alongside your build step,
-so the build output will include any lint warnings as well.
+For linting, you should install the `clangd` VSCode extension (and make sure you have IntelliSense disabled). This
+will give you very fast linting, performing the same checks as `clang-tidy`, but it will not attempt to lint
+system headers. On compilation, you will also get linting from `iwyu`.
 
 You can run linting separately as well (after your build step), using
 
@@ -74,10 +77,7 @@ make lint
 
 ### Linting in CI
 
-In CI, we don't use linting, as it is very very slow (5+ minutes, all because of system headers).
-
-One option would be to try with `clangd`'s implementation of `clang-tidy`, as it supposedly skips system
-headers by default (although it does disable a few `clang-tidy` checks).
+In CI, the `make lint` command is run for linting
 
 ## Formatting
 

@@ -4,3 +4,4 @@
 build/
 external/installed
 Testing/
+.cache
