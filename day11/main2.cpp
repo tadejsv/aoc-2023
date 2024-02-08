@@ -57,5 +57,5 @@ int main() { // NOLINT
         }
     }
 
-    std::cout << sum_dists << "\n" << "1";
+    std::cout << sum_dists << "\n";
 }
