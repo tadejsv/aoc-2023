@@ -1,5 +1,8 @@
+set export
+
 BUILDDIR := "build"
 CPP_FILES := `find . -type d \( -path './.*' -o -path './build*' -o -path './external*' \) -prune -o -type f \( -name '*.cpp' -o -name '*.h' \) -printf '%p '`
+ENV_ROOT := `readlink -f .pixi/envs/default`
 
 default_target := "all"
 default_preset := "debug"
@@ -10,7 +13,6 @@ clean:
 
 # Install Eigen library
 install-eigen:
-	export ENV_ROOT=$(readlink -f .pixi/envs/default) && \
 	cd external/eigen && rm -rf build && cmake -G Ninja -S . -B build \
 		-DCMAKE_INSTALL_PREFIX=../installed \
 		-DCMAKE_TOOLCHAIN_FILE=../../toolchain/Clang.cmake \
@@ -19,7 +21,6 @@ install-eigen:
 
 # Install Catch library
 install-catch:
-	export ENV_ROOT=$(readlink -f .pixi/envs/default) && \
 	cd external/catch2 && rm -rf build && cmake -G Ninja -S . -B build \
 		-DCMAKE_INSTALL_PREFIX=../installed \
 		-DCMAKE_TOOLCHAIN_FILE=../../toolchain/Clang.cmake \

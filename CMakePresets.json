@@ -21,8 +21,8 @@
         {
             "name": "debug",
             "displayName": "Debug",
-            "inherits": "base",
             "binaryDir": "build/debug",
+            "inherits": "base",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug"
             }
@@ -31,6 +31,7 @@
             "name": "release",
             "displayName": "Release",
             "binaryDir": "build/release",
+            "inherits": "base",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release"
             }
@@ -40,7 +41,6 @@
             "displayName": "CI",
             "inherits": "release",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release",
                 "CMAKE_CXX_FLAGS": "-Werror -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion"
             }
         }
