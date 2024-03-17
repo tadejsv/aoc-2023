@@ -1,8 +1,23 @@
 TODO:
-* Use `just` instead of make, drop the cmake extension, use only `just` and clangd
+* Set up debugging for VSCode to not use CMake extension (write a launch.json that uses lldb)
 * Use CMake presets (you can take out common things from toolchain files)
   * Look into "general" and user files, also how they interact with toolchains
+* Fix linting so CI passes 
+* Separate release build, probably `release` folder (`build` stays debug by default)
+  * probably separate commands in just, or add target for all configuire, have it debug by default
+* Configure include what you use separately using `iwyu_tool.py -p build`
 * Proper error handling and executions
+
+
+---
+
+for presets:
+  * need 1 for release, 1 for debug
+  * 1 for 3rd party
+
+
+---
+add just to readme, also mention you can set target for build
 
 ## Build and install external dependencies
 

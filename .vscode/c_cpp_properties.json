@@ -10,7 +10,7 @@
             "intelliSenseMode": "linux-clang-x86",
             "configurationProvider": "ms-vscode.cmake-tools",
             "cppStandard": "c++23",
-            "compilerPath": "/home/tadej/projects/aoc-2023/.pixi/env/bin/clang++"
+            "compilerPath": "/home/tadej/projects/aoc-2023/.pixi/envs/default/bin/clang++"
         }
     ],
     "version": 4

@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: taiki-e/install-action@just
       - uses: actions/checkout@v4
         with:
           submodules: true
@@ -19,21 +20,22 @@ jobs:
           pixi-version: v0.12.0
           cache: true
       - name: Install external dependencies
-        run: make install-external
+        run: just install-external
         shell: pixi run bash {0}
 
       - name: Build
-        run: make build-ci
+        run: just build-ci
         shell: pixi run bash {0}
 
       - name: Test
-        run: make test
+        run: just test
         shell: pixi run bash {0}
 
   lint:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: taiki-e/install-action@just
       - uses: actions/checkout@v4
         with:
           submodules: true
@@ -42,17 +44,17 @@ jobs:
           pixi-version: v0.12.0
           cache: true
       - name: Install external dependencies
-        run: make install-external
+        run: just install-external
         shell: pixi run bash {0}
 
       - name: Build
-        run: make configure-ci
+        run: just configure-ci
         shell: pixi run bash {0}
 
       - name: Check formatting
-        run: make check-format
+        run: just check-format
         shell: pixi run bash {0}
 
       - name: Lint
-        run: make lint
+        run: just lint
         shell: pixi run bash {0}
