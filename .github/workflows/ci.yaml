@@ -48,7 +48,7 @@ jobs:
         shell: pixi run bash {0}
 
       - name: Build
-        run: just build-new ci
+        run: just configure release
         shell: pixi run bash {0}
 
       - name: Check formatting
@@ -56,5 +56,5 @@ jobs:
         shell: pixi run bash {0}
 
       - name: Lint
-        run: just lint ci
+        run: just lint release
         shell: pixi run bash {0}
