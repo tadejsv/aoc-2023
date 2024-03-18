@@ -1,6 +1,5 @@
 #include "day6.h"
 #include "utils/utils.h"
-#include <fstream>
 #include <iostream>
 #include <numeric>
 #include <string>

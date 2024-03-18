@@ -1,6 +1,5 @@
 #include "day6.h"
 #include "utils/utils.h"
-#include <fstream>
 #include <iostream>
 #include <string>
 #include <string_view>

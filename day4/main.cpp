@@ -1,6 +1,4 @@
 #include "utils/utils.h"
-#include <cmath>
-#include <fstream>
 #include <iostream>
 #include <string>
 #include <string_view>
@@ -54,7 +52,7 @@ struct Card {
         }
     }
 
-    auto points() -> int const {
+    [[nodiscard]] auto points() const -> int {
         auto lucky_numbers{intersection(our_numbers, winning_numbers)};
         if (lucky_numbers.empty()) {
             return 0;

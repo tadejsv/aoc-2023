@@ -1,12 +1,8 @@
 #include "utils/utils.h"
 #include <algorithm>
-#include <chrono> // for std::chrono functions
-#include <cmath>
-#include <fstream>
 #include <iostream>
 #include <string>
 #include <string_view>
-#include <unordered_set>
 #include <vector>
 
 struct RangeIndex {
@@ -102,8 +98,9 @@ int main() { // NOLINT
     }
     auto min_el = *std::ranges::min_element(locations);
 
-    std::cout << "Time elapsed: " << timer.elapsed() * 1000000 / seeds.size()
-              << " μs\n";
+    constexpr double mus_in_s{1000000};
+    double time_elapsed{timer.elapsed() * mus_in_s / static_cast<double>(seeds.size())};
+    std::cout << "Time elapsed: " << time_elapsed << " μs\n";
     std::cout << min_el << " ";
 
     return 0;
