@@ -73,6 +73,7 @@ int main() { // NOLINT
     }
 
     std::vector<long> lengths{};
+    lengths.reserve(start_nodes.size());
     for (auto const &node : start_nodes) {
         lengths.push_back(graph.walk(node, END_CHAR));
     }
