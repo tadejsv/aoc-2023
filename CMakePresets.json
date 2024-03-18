@@ -36,6 +36,7 @@
         {
             "name": "ci",
             "displayName": "CI",
+            "description": "Same as release preset, but adding -Werror flag",
             "inherits": "release",
             "cacheVariables": {
                 "CMAKE_CXX_FLAGS": "-Werror -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion"
@@ -61,9 +62,8 @@
     ],
     "testPresets": [
         {
-            "name": "debug",
-            "configurePreset": "debug",
-            "displayName": "Debug Test Build",
+            "name": "base",
+            "hidden": true,
             "output": {
                 "outputOnFailure": true,
                 "verbosity": "verbose"
@@ -71,6 +71,18 @@
             "execution": {
                 "jobs": 10
             }
+        },
+        {
+            "name": "debug",
+            "configurePreset": "debug",
+            "displayName": "Test Debug Build",
+            "inherits": "base"
+        },
+        {
+            "name": "release",
+            "configurePreset": "release",
+            "displayName": "Test Release Build",
+            "inherits": "base"
         }
     ]
 }

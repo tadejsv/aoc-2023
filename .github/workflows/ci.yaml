@@ -28,7 +28,7 @@ jobs:
         shell: pixi run bash {0}
 
       - name: Test
-        run: just test ci
+        run: just test release
         shell: pixi run bash {0}
 
   lint:
