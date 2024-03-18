@@ -48,7 +48,7 @@ jobs:
         shell: pixi run bash {0}
 
       - name: Build
-        run: just configure release
+        run: just build-new release
         shell: pixi run bash {0}
 
       - name: Check formatting

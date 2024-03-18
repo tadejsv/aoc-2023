@@ -1,13 +1,10 @@
 #include "utils/utils.h"
 #include <Eigen/Dense>
-#include <algorithm>
 #include <cmath>
 #include <cstddef>
-#include <fstream>
 #include <iostream>
 #include <string>
 #include <string_view>
-#include <utility>
 #include <vector>
 
 using Eigen::MatrixXi;
@@ -235,7 +232,8 @@ int main() { // NOLINT
         }
     }
 
-    int result = std::ceil(static_cast<double>(loop_length) / 2.0);
+    constexpr double two{2.0};
+    int result = static_cast<int>(std::ceil(static_cast<double>(loop_length) / two));
 
     std::cout << "Final loop length: " << loop_length << "\n";
     std::cout << "Max distance " << result << "\n";
