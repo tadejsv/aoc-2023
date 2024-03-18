@@ -7,9 +7,6 @@
             "hidden": true,
             "generator": "Ninja",
             "toolchainFile": "${fileDir}/toolchain/Clang.cmake",
-            "environment": {
-                "ENV_ROOT": "${fileDir}/.pixi/envs/default"
-            },
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
                 "CMAKE_CXX_FLAGS": "-Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion",
@@ -60,6 +57,20 @@
             "name": "ci",
             "displayName": "CI Release Build",
             "configurePreset": "ci"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "debug",
+            "configurePreset": "debug",
+            "displayName": "Debug Test Build",
+            "output": {
+                "outputOnFailure": true,
+                "verbosity": "verbose"
+            },
+            "execution": {
+                "jobs": 10
+            }
         }
     ]
 }

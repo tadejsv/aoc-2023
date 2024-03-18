@@ -9,7 +9,7 @@ default_preset := "debug"
 
 # Clean the build folder
 clean:
-    rm -rf {{BUILDDIR}}
+	rm -rf {{BUILDDIR}}
 
 # Install Eigen library
 install-eigen:
@@ -32,8 +32,9 @@ install-catch:
 install-external: install-catch install-eigen
 
 # Clean the build folder and configure CMake
-configure preset=default_preset: clean
-    cmake --preset {{preset}}
+configure preset=default_preset:
+	rm -rf {{BUILDDIR}}/{{preset}}
+	cmake --preset {{preset}}
 
 # Build a target
 build preset=default_preset target=default_target:
@@ -44,7 +45,7 @@ build-new preset=default_preset target=default_target: (configure preset) (build
 
 # Build a target and run it (from the directory of the binary)
 run preset=default_preset target=default_target: (build preset target)
-    find {{BUILDDIR}}/{{preset}} -type f -name "{{target}}" -exec sh -c 'cd $(dirname {}) && ./$(basename {})' \;
+	find {{BUILDDIR}}/{{preset}} -type f -name "{{target}}" -exec sh -c 'cd $(dirname {}) && ./$(basename {})' \;
 
 # Format all C++ files with clang-format
 format:
@@ -60,4 +61,4 @@ lint preset=default_preset:
 
 # Run all tests
 test preset=default_preset:
-	ctest -V --test-dir {{BUILDDIR}}/{{preset}} -T test -j10 --output-on-failure
+	ctest --preset {{preset}}
