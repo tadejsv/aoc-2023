@@ -2,8 +2,8 @@
 
 #include <iostream>
 #include <string>
-#include <vector>
 #include <unordered_map>
+#include <vector>
 
 struct GameMax {
     int red;
