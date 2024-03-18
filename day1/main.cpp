@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-int main() {
+int main() { // NOLINT
     const std::string fname{"input.txt"};
 
     std::ifstream file{fname};
@@ -39,8 +39,9 @@ int main() {
     }
 
     int total{0};
+    constexpr int first_digit_multiplier{10};
     for (const auto &nums : line_numbers) {
-        total += 10 * nums[0] + nums[1];
+        total += first_digit_multiplier * nums[0] + nums[1];
     }
 
     std::cout << total;

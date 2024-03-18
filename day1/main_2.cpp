@@ -1,16 +1,18 @@
 #include <array>
 #include <cctype>
+#include <cstddef>
 #include <fstream> // IWYU pragma: keep
 #include <iostream>
 #include <string>
 #include <unordered_map>
 #include <vector>
 
-auto find_digit(std::string str, int start, int end, int substr_length,
-                std::unordered_map<std::string, int> digit_map) -> int {
+auto find_digit(const std::string &str, std::size_t start, std::size_t end,
+                std::size_t substr_length,
+                const std::unordered_map<std::string, int> &digit_map) -> int {
     if (end - start + 1 >= substr_length) {
         auto substr = str.substr(end - substr_length + 1, substr_length);
-        std::cout << substr << std::endl;
+        std::cout << substr << "\n";
         auto num_ret = digit_map.find(substr);
         if (num_ret != digit_map.end()) {
             return num_ret->second;
@@ -25,7 +27,7 @@ auto find_digit(std::string str, int start, int end, int substr_length,
 // line for all numbers (both digits and words), and takes the first and last
 // number of each line, concatenates them together (e.g. (2, 5) -> 25), and sums
 // up the numbers for all the lines. It then prints out the final sum.
-auto main() -> int {
+auto main() -> int { // NOLINT
     const std::string fname{"../../day1/input.txt"};
 
     std::ifstream file{fname};
@@ -59,7 +61,7 @@ auto main() -> int {
     while (getline(file, line)) {
         std::array<int, 2> numbers{};
         bool gotFirst{false};
-        int last_digit_pos{0};
+        std::size_t last_digit_pos{0};
 
         for (size_t i = 0; i < line.length(); ++i) {
             int digit{-1};
@@ -79,8 +81,10 @@ auto main() -> int {
                     four_digit >= 0) {
                     digit = four_digit;
                 }
+
+                constexpr std::size_t len5{5};
                 if (auto five_digit =
-                        find_digit(line, last_digit_pos, i, 5, five_letter_nums);
+                        find_digit(line, last_digit_pos, i, len5, five_letter_nums);
                     five_digit >= 0) {
                     digit = five_digit;
                 }
@@ -101,8 +105,9 @@ auto main() -> int {
     }
 
     int total{0};
+    constexpr int first_digit_multiplier{10};
     for (const auto &nums : line_numbers) {
-        total += 10 * nums[0] + nums[1];
+        total += first_digit_multiplier * nums[0] + nums[1];
     }
 
     std::cout << total;
