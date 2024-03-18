@@ -4,7 +4,6 @@
 #include <array>
 #include <cstddef>
 #include <string_view>
-#include <unordered_map>
 
 constexpr std::size_t NUM_CARDS{5};
 
