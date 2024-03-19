@@ -1,6 +1,5 @@
 TODO:
 * Set up debugging for VSCode to not use CMake extension (write a launch.json that uses lldb)
-* Fix linting so CI passes 
 * Proper error handling and executions
 
 
@@ -13,11 +12,10 @@ This project uses 2 external dependencies: `Eigen` (for matrices) and `Catch2`.
 To install them, execute
 
 ```
-make install-external
+just install-external
 ```
 
 This only has to be done once.
-
 
 ### How the installation works
 
@@ -37,33 +35,77 @@ However, for compiled libraries, like `Catch2`, this would fail. This is because
 
 This option would build the external libraries together with our executables - unlike with `pixi`-installed libraries, this would work, but the downside is that we would get a lot of warnings from our linter for these external libraries, and we would need to re-build the libraries every time we want to build form scratch (deleting the `build/` directory), which would significantly increase the build times.
 
+### Why doesn't the installation use CMake presets?
+
+Unlike the compilation of the executables (exercises) in this repo, we can not use CMake presets to specify the CMake configuration for external dependencies. This is because unfortunately, `CMakePresets.json` file would need to be in the source root directory (the file path is hardcoded in CMake).
+
+For now, this is not a big issue - we are only building for one type of configuration, so we can just write out all the arguments manually (and we do reuse the CLang toolchain file). However, if we had more configurations (different operating systems or different architectures), this would get unmanagable.
+
+In that case, the only option is forking the 3rd party repository, and inserting / replacin the `CMakePresets.json` file, and importing from our main presets file using `include`.
+
+## Setting up CMake configuration
+
+Before compiling, you must prepare the `CMake` configuration. This can be done with
+
+```
+just configure
+```
+
+or also as part of the build step if using `just build-new` (see below). By default, the `debug` preset will be used for building. You can choose a different preset with
+
+```
+just configure PRESET_NAME
+```
+
+To see a list of available presets use
+
+```
+cmake --list-presets
+```
+
+We currently have a `debug` preset (using a `Debug` build type), a `release` preset (using `Relase` build type) and the `ci` preset (same as release, but with `-Werror` configuration arg added).
+
+This command will create the build folder - either `build/debug` or `build/release`.
+
 ## Compiling
 
-To compile from scratch, run
+To compile from scratch (deleting any existing build folder, and re-running the configuration step before compiling), run
 
 ```
-make build-new
+just build-new
 ```
 
-this will delete the `build/` directory, configure CMake and finally run CMake build step.
+this will delete the `build/PRESET_NAME` directory, configure CMake and finally run CMake build step. Just as with the `just configure` command, you can also set a preset here (with `debug` as the default).
 
 To build only binaries for changed code, run
 
 ```
-make build
+just build
 ```
 
-this simply runs the CMake build step, which will not re-build parts that have no changed code.
+this simply runs the CMake build step, which will not re-build parts that have no changed code. You can also set the preset here.
+
+To build and run the executable of a specific target, use
+
+```
+just run PRESET_NAME TARGET_NAME
+```
+
+Both of these arguments must be provided.
 
 ## Testing
 
 You can run all tests with
 
 ```
-make test
+just test
 ```
 
-This should be done after the build step.
+This should be done after the build step. You can also set the preset here.
+
+## Debugging
+
+TODO
 
 ## Linting
 
@@ -74,23 +116,25 @@ system headers. On compilation, you will also get linting from `iwyu`.
 You can run linting separately as well (after your build step), using
 
 ```
-make lint
+just lint
 ```
+
+You can also set the preset here.
 
 ### Linting in CI
 
-In CI, the `make lint` command is run for linting
+In CI, the `just lint` command is run for linting
 
 ## Formatting
 
 To format using `clang-format`, use
 
 ```
-make format
+just format
 ```
 
 You can also check that formatting is correct using
 
 ```
-make check-format
+just check-format
 ```

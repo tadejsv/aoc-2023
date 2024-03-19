@@ -1,6 +1,5 @@
 #include "utils/utils.h"
 #include <cstddef>
-#include <fstream>
 #include <iostream>
 #include <numeric>
 #include <string>
