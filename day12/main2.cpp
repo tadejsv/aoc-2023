@@ -29,33 +29,35 @@ auto check_empty(std::string_view row,
     std::queue<State> &queue,
     std::vector<long long> &num_paths) -> long long {
 
-    const std::size_t curr_ind{state.ind(groups.size())};
+    const std::size_t n_groups{groups.size()};
+    const long long curr_paths = num_paths[state.ind(n_groups)];
 
     // If this is the last character in row - did all the groups get filled?
     if (row.size() - 1 == state.current_ind) {
-        if (state.group_ind == groups.size()) {
-            return num_paths[curr_ind];
+        if (state.group_ind == n_groups) {
+            return curr_paths;
         }
         return 0;
     }
 
-    std::size_t next_ind{state.current_ind + 1};
-    if (row[next_ind] == '?' || row[next_ind] == '.') {
+    const std::size_t next_ind{state.current_ind + 1};
+    const char next_char{row[next_ind]};
+    if (next_char == '?' || next_char == '.') {
         State new_state{next_ind, state.group_ind, 1};
-        const auto new_ind{new_state.ind(groups.size())};
+        const auto new_ind{new_state.ind(n_groups)};
         if (num_paths[new_ind] == 0) {
             queue.push(new_state);
         }
-        num_paths[new_ind] += num_paths[curr_ind];
+        num_paths[new_ind] += curr_paths;
     }
 
-    if (row[next_ind] == '?' || row[next_ind] == '#') {
+    if (next_char == '?' || next_char == '#') {
         State new_state{next_ind, state.group_ind, 0};
-        const auto new_ind{new_state.ind(groups.size())};
+        const auto new_ind{new_state.ind(n_groups)};
         if (num_paths[new_ind] == 0) {
             queue.push(new_state);
         }
-        num_paths[new_ind] += num_paths[curr_ind];
+        num_paths[new_ind] += curr_paths;
     }
 
     return 0;
@@ -67,45 +69,47 @@ auto check_damaged(std::string_view row,
     std::queue<State> &queue,
     std::vector<long long> &num_paths) -> long long {
 
-    const std::size_t curr_ind{state.ind(groups.size())};
+    const std::size_t n_groups{groups.size()};
+    const long long curr_paths{num_paths[state.ind(n_groups)]};
 
     // Did we already pass the last group
-    if (state.group_ind == groups.size()) {
+    if (state.group_ind == n_groups) {
         return 0;
     }
 
     // Enough space in row to fill group?
-    std::size_t group_size{static_cast<std::size_t>(groups[state.group_ind])};
-    if (row.size() - state.current_ind < group_size) {
+    const std::size_t group_end{
+        state.current_ind + static_cast<std::size_t>(groups[state.group_ind])};
+    if (row.size() < group_end) {
         return 0;
     }
 
     // All items in group spanned '#' or '?' ?
-    for (std::size_t i{state.current_ind}; i < state.current_ind + group_size; i++) {
+    for (std::size_t i{state.current_ind}; i < group_end; i++) {
         if (row[i] == '.') {
             return 0;
         }
     }
 
     // Are we at end of row?
-    if (row.size() == state.current_ind + group_size) {
-        if (state.group_ind == groups.size() - 1) {
-            return num_paths[curr_ind];
+    if (row.size() == group_end) {
+        if (state.group_ind == n_groups - 1) {
+            return curr_paths;
         }
         return 0;
     }
 
     // Is the next character '.' or '?' ?
-    if (row[state.current_ind + group_size] == '#') {
+    if (row[group_end] == '#') {
         return 0;
     }
 
-    State new_state{state.current_ind + group_size, state.group_ind + 1, 1};
-    const auto new_ind{new_state.ind(groups.size())};
+    State new_state{group_end, state.group_ind + 1, 1};
+    const auto new_ind{new_state.ind(n_groups)};
     if (num_paths[new_ind] == 0) {
         queue.push(new_state);
     }
-    num_paths[new_ind] += num_paths[curr_ind];
+    num_paths[new_ind] += curr_paths;
 
     return 0;
 }
