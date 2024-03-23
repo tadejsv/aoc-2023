@@ -7,9 +7,11 @@
 #include <unordered_map>
 #include <vector>
 
-auto find_digit(const std::string &str, std::size_t start, std::size_t end,
-                std::size_t substr_length,
-                const std::unordered_map<std::string, int> &digit_map) -> int {
+auto find_digit(const std::string &str,
+    std::size_t start,
+    std::size_t end,
+    std::size_t substr_length,
+    const std::unordered_map<std::string, int> &digit_map) -> int {
     if (end - start + 1 >= substr_length) {
         auto substr = str.substr(end - substr_length + 1, substr_length);
         std::cout << substr << "\n";

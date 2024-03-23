@@ -52,8 +52,9 @@ auto get_digits(const std::vector<std::string> &lines) -> std::vector<Digit> {
                 current_digits += character;
             } else if (current_digits.length() > 0) {
                 // Digit has ended, mark it down
-                Digit new_digit{std::stoi(current_digits), current_digits.length(),
-                                std::array<Eigen::Index, 2>{i, j - 1}};
+                Digit new_digit{std::stoi(current_digits),
+                    current_digits.length(),
+                    std::array<Eigen::Index, 2>{i, j - 1}};
                 digits.push_back(new_digit);
                 current_digits = "";
             }
@@ -61,8 +62,9 @@ auto get_digits(const std::vector<std::string> &lines) -> std::vector<Digit> {
 
         if (current_digits.length() > 0) {
             // Digit has ended, mark it down
-            Digit new_digit{std::stoi(current_digits), current_digits.length(),
-                            std::array<Eigen::Index, 2>{i, height - 1}};
+            Digit new_digit{std::stoi(current_digits),
+                current_digits.length(),
+                std::array<Eigen::Index, 2>{i, height - 1}};
             digits.push_back(new_digit);
             current_digits = "";
         }

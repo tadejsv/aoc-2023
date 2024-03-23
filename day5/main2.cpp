@@ -113,8 +113,8 @@ int main() { // NOLINT
             if (current_range_map != nullptr) {
                 current_range_map->add_range(
                     RangeIndex{.key_start = std::stoll(numbers_str.at(1)),
-                               .val_start = std::stoll(numbers_str.at(0)),
-                               .length = std::stoll(numbers_str.at(2))});
+                        .val_start = std::stoll(numbers_str.at(0)),
+                        .length = std::stoll(numbers_str.at(2))});
             } else {
                 std::cout << "oh no";
             }

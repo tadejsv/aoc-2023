@@ -17,8 +17,8 @@ int main() { // NOLINT
         hands.emplace_back(JHand(hand_win.at(0)), std::stoi(hand_win.at(1)));
     }
 
-    std::sort(
-        hands.begin(), hands.end(),
+    std::sort(hands.begin(),
+        hands.end(),
         [](const std::pair<JHand, int> &hand1, const std::pair<JHand, int> &hand2) {
             return compare_jhands(hand1.first, hand2.first);
         });

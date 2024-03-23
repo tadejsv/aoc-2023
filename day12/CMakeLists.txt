@@ -1,5 +1,5 @@
-add_executable(Day12 main.cpp)
-# add_executable(Day12 main2.cpp)
+# add_executable(Day12 main.cpp)
+add_executable(Day12 main2.cpp)
 
 target_link_libraries(Day12 PRIVATE compiler_flags utils)
 

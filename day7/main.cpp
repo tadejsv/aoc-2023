@@ -17,10 +17,11 @@ int main() { // NOLINT
         hands.emplace_back(Hand(hand_win.at(0)), std::stoi(hand_win.at(1)));
     }
 
-    std::sort(hands.begin(), hands.end(),
-              [](const std::pair<Hand, int> &hand1, const std::pair<Hand, int> &hand2) {
-                  return compare_hands(hand1.first, hand2.first);
-              });
+    std::sort(hands.begin(),
+        hands.end(),
+        [](const std::pair<Hand, int> &hand1, const std::pair<Hand, int> &hand2) {
+            return compare_hands(hand1.first, hand2.first);
+        });
 
     long winnings{0};
     for (std::size_t i{0}; i < hands.size(); ++i) {

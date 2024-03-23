@@ -13,8 +13,10 @@
 
 using Eigen::MatrixXi;
 
-auto interval_intersect(Eigen::Index left_1, Eigen::Index right_1, Eigen::Index left_2,
-                        Eigen::Index right_2) -> bool {
+auto interval_intersect(Eigen::Index left_1,
+    Eigen::Index right_1,
+    Eigen::Index left_2,
+    Eigen::Index right_2) -> bool {
     return left_1 <= right_2 && left_2 <= right_1;
 };
 
@@ -66,8 +68,9 @@ auto get_digits(const std::vector<std::string> &lines)
                 current_digits += character;
             } else if (current_digits.length() > 0) {
                 // Digit has ended, mark it down
-                Digit new_digit{std::stoi(current_digits), current_digits.length(),
-                                std::array<Eigen::Index, 2>{i, j - 1}};
+                Digit new_digit{std::stoi(current_digits),
+                    current_digits.length(),
+                    std::array<Eigen::Index, 2>{i, j - 1}};
                 line_digits.push_back(new_digit);
                 current_digits = "";
             }
@@ -75,8 +78,9 @@ auto get_digits(const std::vector<std::string> &lines)
 
         if (current_digits.length() > 0) {
             // Digit has ended, mark it down
-            Digit new_digit{std::stoi(current_digits), current_digits.length(),
-                            std::array<Eigen::Index, 2>{i, height - 1}};
+            Digit new_digit{std::stoi(current_digits),
+                current_digits.length(),
+                std::array<Eigen::Index, 2>{i, height - 1}};
             line_digits.push_back(new_digit);
             current_digits = "";
         }
@@ -100,11 +104,12 @@ int main() { // NOLINT
         int num_digits{0};
 
         for (auto i = std::max(gear[0] - 1L, 0L);
-             i <= std::min(gear[0] + 1L, num_lines); i++) {
+             i <= std::min(gear[0] + 1L, num_lines);
+             i++) {
             auto const &line_digits = digits[static_cast<std::size_t>(i)];
             for (auto const &digit : line_digits) {
-                if (interval_intersect(digit.start_x(), digit.index[1], gear[1] - 1L,
-                                       gear[1] + 1L)) {
+                if (interval_intersect(
+                        digit.start_x(), digit.index[1], gear[1] - 1L, gear[1] + 1L)) {
                     digit_product *= digit.digit;
                     num_digits += 1;
                 }

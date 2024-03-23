@@ -5,7 +5,7 @@
 #include <unordered_set>
 
 auto intersection(const std::unordered_set<int> &set1,
-                  const std::unordered_set<int> &set2) -> std::unordered_set<int> {
+    const std::unordered_set<int> &set2) -> std::unordered_set<int> {
     std::unordered_set<int> intersection_set;
     if (set1.size() > set2.size()) {
         for (auto element : set2) {

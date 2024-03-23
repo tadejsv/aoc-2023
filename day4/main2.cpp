@@ -7,7 +7,7 @@
 #include <unordered_set>
 
 auto intersection(const std::unordered_set<int> &set1,
-                  const std::unordered_set<int> &set2) -> std::unordered_set<int> {
+    const std::unordered_set<int> &set2) -> std::unordered_set<int> {
     std::unordered_set<int> intersection_set;
     if (set1.size() > set2.size()) {
         for (auto element : set2) {
@@ -68,7 +68,8 @@ int main() { // NOLINT
         auto const card_wins = card.wins();
 
         for (size_t j = i + 1;
-             j < std::min(i + 1 + static_cast<size_t>(card_wins), lines.size()); j++) {
+             j < std::min(i + 1 + static_cast<size_t>(card_wins), lines.size());
+             j++) {
             cards[j] += cards[i];
         }
     }

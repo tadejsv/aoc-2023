@@ -6,14 +6,34 @@
 #include <unordered_map>
 #include <vector>
 
-static const std::unordered_map<char, int> card_strength = {
-    {'A', 14}, {'K', 13}, {'Q', 12}, {'J', 11}, {'T', 10}, {'9', 9}, {'8', 8},
-    {'7', 7},  {'6', 6},  {'5', 5},  {'4', 4},  {'3', 3},  {'2', 2}};
+static const std::unordered_map<char, int> card_strength = {{'A', 14},
+    {'K', 13},
+    {'Q', 12},
+    {'J', 11},
+    {'T', 10},
+    {'9', 9},
+    {'8', 8},
+    {'7', 7},
+    {'6', 6},
+    {'5', 5},
+    {'4', 4},
+    {'3', 3},
+    {'2', 2}};
 
 static const char JOKER{'J'};
-static const std::unordered_map<char, int> jcard_strength = {
-    {'A', 14}, {'K', 13}, {'Q', 12}, {'T', 10}, {'9', 9}, {'8', 8}, {'7', 7},
-    {'6', 6},  {'5', 5},  {'4', 4},  {'3', 3},  {'2', 2}, {'J', 1}};
+static const std::unordered_map<char, int> jcard_strength = {{'A', 14},
+    {'K', 13},
+    {'Q', 12},
+    {'T', 10},
+    {'9', 9},
+    {'8', 8},
+    {'7', 7},
+    {'6', 6},
+    {'5', 5},
+    {'4', 4},
+    {'3', 3},
+    {'2', 2},
+    {'J', 1}};
 
 Hand::Hand(std::string_view hand) { // NOLINT(cppcoreguidelines-pro-type-member-init)
     std::unordered_map<char, int> counts_map;
