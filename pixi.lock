@@ -28,6 +28,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/krb5-1.21.2-h659d440_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/ld_impl_linux-64-2.40-h41732ed_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libclang-cpp17-17.0.6-default_hb11cfb5_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/libclang-cpp18.1-18.1.2-default_h127d8a8_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libclang13-17.0.6-default_ha2b6cf4_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libcurl-8.5.0-hca28451_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libcxx-16.0.6-h00ab1b0_0.conda
@@ -43,6 +44,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libgomp-13.2.0-h807b86a_3.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libiconv-1.17-h166bdaf_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libllvm17-17.0.6-hb3ce162_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/libllvm18-18.1.2-h2448989_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libnghttp2-1.58.0-h47da74e_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libnsl-2.0.1-hd590300_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libsqlite-3.44.2-h2797004_0.conda
@@ -52,11 +54,12 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libunwind-1.6.2-h9c3ff4c_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libuuid-2.38.1-h0b41bf4_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libuv-1.46.0-hd590300_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/libxml2-2.12.1-h232c23b_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/libxml2-2.12.6-h232c23b_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libzlib-1.2.13-hd590300_5.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/lld-17.0.6-hcfcaf08_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/lldb-18.1.2-py311hbdb365e_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/llvm-tools-17.0.6-hb3ce162_1.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/ncurses-6.4-h59595ed_2.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/ncurses-6.4.20240210-h59595ed_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/ninja-1.11.1-h924138e_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/openssl-3.2.0-hd590300_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pygments-2.17.2-pyhd8ed1ab_0.conda
@@ -511,6 +514,23 @@ packages:
   size: 18504442
   timestamp: 1701417818866
 - kind: conda
+  name: libclang-cpp18.1
+  version: 18.1.2
+  build: default_h127d8a8_1
+  build_number: 1
+  subdir: linux-64
+  url: https://conda.anaconda.org/conda-forge/linux-64/libclang-cpp18.1-18.1.2-default_h127d8a8_1.conda
+  sha256: f1aeeae04a316a7425d7ff71895b828a7fc26f58d2509fd266dd4683aac9ffa2
+  md5: dc9fe55eef7cc9f1cce884b21c402a93
+  depends:
+  - libgcc-ng >=12
+  - libllvm18 >=18.1.2,<18.2.0a0
+  - libstdcxx-ng >=12
+  license: Apache-2.0 WITH LLVM-exception
+  license_family: Apache
+  size: 19272925
+  timestamp: 1711067597580
+- kind: conda
   name: libclang13
   version: 17.0.6
   build: default_ha2b6cf4_1
@@ -781,6 +801,24 @@ packages:
   size: 36641112
   timestamp: 1701374240421
 - kind: conda
+  name: libllvm18
+  version: 18.1.2
+  build: h2448989_0
+  subdir: linux-64
+  url: https://conda.anaconda.org/conda-forge/linux-64/libllvm18-18.1.2-h2448989_0.conda
+  sha256: 231b3edb7650786fd9fc6ac8d7ecf38d663a0ae63eeb1f19c4c1c17d2eb98d51
+  md5: fae7780457e00a07d068417d9dbdb24b
+  depends:
+  - libgcc-ng >=12
+  - libstdcxx-ng >=12
+  - libxml2 >=2.12.6,<3.0a0
+  - libzlib >=1.2.13,<1.3.0a0
+  - zstd >=1.5.5,<1.6.0a0
+  license: Apache-2.0 WITH LLVM-exception
+  license_family: Apache
+  size: 38407510
+  timestamp: 1710943474854
+- kind: conda
   name: libnghttp2
   version: 1.58.0
   build: h47da74e_0
@@ -933,24 +971,22 @@ packages:
   timestamp: 1693539405436
 - kind: conda
   name: libxml2
-  version: 2.12.1
+  version: 2.12.6
   build: h232c23b_0
   subdir: linux-64
-  url: https://conda.anaconda.org/conda-forge/linux-64/libxml2-2.12.1-h232c23b_0.conda
-  sha256: c1992511c98f9bcb239add5229c84466f4f850ff6e698dc9a39914b1240c7a52
-  md5: 15c74547f51fa8fc88fba0b8063bd79c
+  url: https://conda.anaconda.org/conda-forge/linux-64/libxml2-2.12.6-h232c23b_0.conda
+  sha256: 4646ae14fb226080d2bfeb89510147abebd603bab1c80bb6b3c02a01c10c6ee5
+  md5: d86653ff5ccb88bf7f13833fdd8789e0
   depends:
   - icu >=73.2,<74.0a0
   - libgcc-ng >=12
   - libiconv >=1.17,<2.0a0
   - libzlib >=1.2.13,<1.3.0a0
   - xz >=5.2.6,<6.0a0
-  arch: x86_64
-  platform: linux
   license: MIT
   license_family: MIT
-  size: 704734
-  timestamp: 1700788447752
+  size: 704019
+  timestamp: 1710715057008
 - kind: conda
   name: libzlib
   version: 1.2.13
@@ -993,6 +1029,35 @@ packages:
   size: 6906997
   timestamp: 1701230187542
 - kind: conda
+  name: lldb
+  version: 18.1.2
+  build: py311hbdb365e_0
+  subdir: linux-64
+  url: https://conda.anaconda.org/conda-forge/linux-64/lldb-18.1.2-py311hbdb365e_0.conda
+  sha256: fb373d7f6db55d0eeea31d2b9d2d28f9ddc1bf96c6f6d08dab90eb57820352f2
+  md5: a367e6a87761ed863b56f2f91ebb8f21
+  depends:
+  - __glibc >=2.17,<3.0.a0
+  - libclang-cpp18.1 >=18.1.2,<18.2.0a0
+  - libedit >=3.1.20191231,<3.2.0a0
+  - libgcc-ng >=12
+  - libllvm18 >=18.1.2,<18.2.0a0
+  - libstdcxx-ng >=12
+  - libxml2 >=2.12.6,<3.0a0
+  - libzlib >=1.2.13,<1.3.0a0
+  - ncurses >=6.4.20240210,<7.0a0
+  - python >=3.11,<3.12.0a0
+  - python_abi 3.11.* *_cp311
+  - six
+  - xz >=5.2.6,<6.0a0
+  - zstd >=1.5.5,<1.6.0a0
+  constrains:
+  - clangdev ==18.1.2
+  - llvmdev ==18.1.2
+  license: NCSA
+  size: 9033958
+  timestamp: 1711122265062
+- kind: conda
   name: llvm-tools
   version: 17.0.6
   build: hb3ce162_1
@@ -1021,20 +1086,17 @@ packages:
   timestamp: 1701374373582
 - kind: conda
   name: ncurses
-  version: '6.4'
-  build: h59595ed_2
-  build_number: 2
+  version: 6.4.20240210
+  build: h59595ed_0
   subdir: linux-64
-  url: https://conda.anaconda.org/conda-forge/linux-64/ncurses-6.4-h59595ed_2.conda
-  sha256: 91cc03f14caf96243cead96c76fe91ab5925a695d892e83285461fb927dece5e
-  md5: 7dbaa197d7ba6032caf7ae7f32c1efa0
+  url: https://conda.anaconda.org/conda-forge/linux-64/ncurses-6.4.20240210-h59595ed_0.conda
+  sha256: aa0f005b6727aac6507317ed490f0904430584fa8ca722657e7f0fb94741de81
+  md5: 97da8860a0da5413c7c98a3b3838a645
   depends:
   - libgcc-ng >=12
-  arch: x86_64
-  platform: linux
   license: X11 AND BSD-3-Clause
-  size: 884434
-  timestamp: 1698751260967
+  size: 895669
+  timestamp: 1710866638986
 - kind: conda
   name: ninja
   version: 1.11.1

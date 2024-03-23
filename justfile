@@ -47,6 +47,10 @@ build-new preset=default_preset target=default_target: (configure preset) (build
 run preset=default_preset target=default_target: (build preset target)
 	find {{BUILDDIR}}/{{preset}} -type f -name "{{target}}" -exec sh -c 'cd $(dirname {}) && ./$(basename {})' \;
 
+# Build the target with debug preset, and load it to the lldb debugger
+debug target: (build "debug" target)
+	cd build/debug/{{lowercamelcase(target)}} && lldb {{target}}
+
 # Format all C++ files with clang-format
 format:
 	clang-format -style=file -i {{CPP_FILES}}

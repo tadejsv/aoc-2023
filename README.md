@@ -1,9 +1,4 @@
-TODO:
-* Set up debugging for VSCode to not use CMake extension (write a launch.json that uses lldb)
-* Proper error handling and executions
 
-
----
 
 ## Build and install external dependencies
 
@@ -105,7 +100,25 @@ This should be done after the build step. You can also set the preset here.
 
 ## Debugging
 
-TODO
+For the lack of good LLDB (linux) integration with, debug is done from the command line.
+
+You just need to execute
+
+```
+just debug TARGET_NAME
+```
+
+and the target will automatically be built, and lldb debugger will be started with the target binary already loaded.
+
+From there on, you can consult the [LLDB documentation](https://lldb.llvm.org/use/tutorial.html) for how to set breakpoints, run the program, inspect the state, etc. For example, setting the breakpoints is very simple (and by some magic there will be no problems with file paths):
+
+```lldb
+(lldb) breakpoint set --file main2.cpp --line 90
+```
+
+this will set the breakpoint at line 90 of the the file `main2.cpp` for your current target.
+
+TODO: useful lldb commands
 
 ## Linting
 
