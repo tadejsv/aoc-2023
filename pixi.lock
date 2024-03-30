@@ -20,7 +20,6 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/cmake-3.28.0-hcfe8598_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/gdb-12.1-py311h467ab62_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/linux-64/gmp-6.3.0-h59595ed_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/hyperfine-1.18.0-he8a937b_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/icu-73.2-h59595ed_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/include-what-you-use-0.21-h59595ed_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/kernel-headers_linux-64-2.6.32-he073ed8_16.conda
@@ -372,22 +371,6 @@ packages:
   license: GPL-2.0-or-later AND LGPL-3.0-or-later
   size: 563123
   timestamp: 1699629991732
-- kind: conda
-  name: hyperfine
-  version: 1.18.0
-  build: he8a937b_0
-  subdir: linux-64
-  url: https://conda.anaconda.org/conda-forge/linux-64/hyperfine-1.18.0-he8a937b_0.conda
-  sha256: 9df636f5b7e6ddfc04165fb63f8febfe01587a74e458962bb29d278722dfada6
-  md5: 11a27d2d59c323da10e2e72199b7d353
-  depends:
-  - libgcc-ng >=12
-  arch: x86_64
-  platform: linux
-  license: MIT
-  license_family: MIT
-  size: 534482
-  timestamp: 1696500043656
 - kind: conda
   name: icu
   version: '73.2'
