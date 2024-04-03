@@ -23,11 +23,11 @@ class Board {
 
         for (Eigen::Index i{0}; i < n_rows; ++i) {
             for (Eigen::Index j{0}; j < n_rows; ++j) {
-                if (lines[static_cast<std::size_t>(i)][static_cast<std::size_t>(j)] ==
-                    'O') {
+                const auto &rock =
+                    lines[static_cast<std::size_t>(i)][static_cast<std::size_t>(j)];
+                if (rock == 'O') {
                     board(i, j) = Round;
-                } else if (lines[static_cast<std::size_t>(i)]
-                                [static_cast<std::size_t>(j)] == '#') {
+                } else if (rock == '#') {
                     board(i, j) = Cube;
                 }
             }
