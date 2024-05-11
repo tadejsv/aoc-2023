@@ -4,5 +4,6 @@
     "clangd.arguments": [
         "--compile-commands-dir=build/debug"
     ],
-    "cmake.cmakePath": "/home/tadej/projects/aoc-2023/.pixi/envs/default/bin/cmake"
+    "cmake.cmakePath": "/home/tadej/projects/aoc-2023/.pixi/envs/default/bin/cmake",
+    "cmake.configureOnOpen": false
 }

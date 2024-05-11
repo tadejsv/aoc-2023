@@ -10,7 +10,7 @@ target_compile_features(compiler_flags INTERFACE cxx_std_23)
 
 # 3rd party dependencies
 find_package(Eigen3 3.4.90 REQUIRED NO_MODULE)
-find_package(Catch2 3.5.3 REQUIRED NO_MODULE)
+find_package(Catch2 3.6.0 REQUIRED NO_MODULE)
 
 include(CTest)
 include(Catch)
@@ -31,3 +31,4 @@ add_subdirectory(day11)
 add_subdirectory(day12)
 add_subdirectory(day13)
 add_subdirectory(day14)
+add_subdirectory(day15)

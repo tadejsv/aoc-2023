@@ -1,4 +1,4 @@
-version: 4
+version: 5
 environments:
   default:
     channels:
@@ -7,6 +7,7 @@ environments:
       linux-64:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/_libgcc_mutex-0.1-conda_forge.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/linux-64/_openmp_mutex-4.5-2_gnu.tar.bz2
+      - conda: https://conda.anaconda.org/conda-forge/noarch/_sysroot_linux-64_curr_repodata_hack-3-h69a702a_14.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/binutils_impl_linux-64-2.40-hf600244_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/bzip2-1.0.8-hd590300_5.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/c-ares-1.23.0-hd590300_0.conda
@@ -22,7 +23,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/gmp-6.3.0-h59595ed_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/icu-73.2-h59595ed_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/include-what-you-use-0.21-h59595ed_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/kernel-headers_linux-64-2.6.32-he073ed8_16.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/kernel-headers_linux-64-4.18.0-he073ed8_2.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/keyutils-1.6.1-h166bdaf_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/linux-64/krb5-1.21.2-h659d440_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/ld_impl_linux-64-2.40-h41732ed_0.conda
@@ -30,8 +31,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libclang-cpp18.1-18.1.2-default_h127d8a8_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libclang13-17.0.6-default_ha2b6cf4_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libcurl-8.5.0-hca28451_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/libcxx-16.0.6-h00ab1b0_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/libcxxabi-16.0.6-ha770c72_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/libcxx-17.0.6-h434a139_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/libcxxabi-17.0.6-ha770c72_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libedit-3.1.20191231-he28a2e2_2.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libev-4.33-h516909a_1.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libexpat-2.5.0-hcb278e6_1.conda
@@ -67,7 +68,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/readline-8.2-h8228510_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/rhash-1.4.4-hd590300_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/six-1.16.0-pyh6c4a22f_0.tar.bz2
-      - conda: https://conda.anaconda.org/conda-forge/noarch/sysroot_linux-64-2.12-he073ed8_16.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/sysroot_linux-64-2.28-he073ed8_2.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/tk-8.6.13-noxft_h4845f30_101.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/tzdata-2023c-h71feb2d_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/xz-5.2.6-h166bdaf_0.tar.bz2
@@ -107,6 +108,20 @@ packages:
   license_family: BSD
   size: 23621
   timestamp: 1650670423406
+- kind: conda
+  name: _sysroot_linux-64_curr_repodata_hack
+  version: '3'
+  build: h69a702a_14
+  build_number: 14
+  subdir: noarch
+  noarch: generic
+  url: https://conda.anaconda.org/conda-forge/noarch/_sysroot_linux-64_curr_repodata_hack-3-h69a702a_14.conda
+  sha256: 0dbeaddc3d5134b5336c52ac05642533b8d1ba2e1316aa92981f4cf5b5388de0
+  md5: 38d211c448a67f12fe693fe25df4da23
+  license: LGPL-2.0-or-later AND LGPL-2.0-or-later WITH exceptions AND GPL-2.0-or-later AND MPL-2.0
+  license_family: GPL
+  size: 21169
+  timestamp: 1708000801681
 - kind: conda
   name: binutils_impl_linux-64
   version: '2.40'
@@ -409,22 +424,22 @@ packages:
   timestamp: 1700443537277
 - kind: conda
   name: kernel-headers_linux-64
-  version: 2.6.32
-  build: he073ed8_16
-  build_number: 16
-  subdir: linux-64
+  version: 4.18.0
+  build: he073ed8_2
+  build_number: 2
+  subdir: noarch
   noarch: generic
-  url: https://conda.anaconda.org/conda-forge/noarch/kernel-headers_linux-64-2.6.32-he073ed8_16.conda
-  sha256: aaa8aa6dc776d734a6702032588ff3c496721da905366d91162e3654c082aef0
-  md5: 7ca122655873935e02c91279c5b03c8c
+  url: https://conda.anaconda.org/conda-forge/noarch/kernel-headers_linux-64-4.18.0-he073ed8_2.conda
+  sha256: a66f71d354bcc0890f683cc0183b2c66c846c3af630c4cdd88eb54d1d17afb3f
+  md5: 53dce80e1e9c697ef06e17cad8f18786
+  depends:
+  - _sysroot_linux-64_curr_repodata_hack 3.*
   constrains:
-  - sysroot_linux-64 ==2.12
-  arch: x86_64
-  platform: linux
+  - sysroot_linux-64 ==2.28
   license: LGPL-2.0-or-later AND LGPL-2.0-or-later WITH exceptions AND GPL-2.0-or-later AND MPL-2.0
   license_family: GPL
-  size: 709007
-  timestamp: 1689214970644
+  size: 1258066
+  timestamp: 1711086600855
 - kind: conda
   name: keyutils
   version: 1.6.1
@@ -556,37 +571,36 @@ packages:
   timestamp: 1701860147844
 - kind: conda
   name: libcxx
-  version: 16.0.6
-  build: h00ab1b0_0
+  version: 17.0.6
+  build: h434a139_0
   subdir: linux-64
-  url: https://conda.anaconda.org/conda-forge/linux-64/libcxx-16.0.6-h00ab1b0_0.conda
-  sha256: 6be6ff55bbf6c7df2d424a112a7ac47e2c367eca17bced0864886e38938226c6
-  md5: e7653a310bead60661ca56ea36bcd26f
+  url: https://conda.anaconda.org/conda-forge/linux-64/libcxx-17.0.6-h434a139_0.conda
+  sha256: f094b7339d383f8f074ef95a3740b0e39531ff556fdf4c996c33b6e21484b9c7
+  md5: 6fe50572bd93ede7a53ba27025abf20a
   depends:
-  - libcxxabi 16.0.6 ha770c72_0
+  - __glibc >=2.17,<3.0.a0
+  - libcxxabi 17.0.6 ha770c72_0
   - libgcc-ng >=12
-  arch: x86_64
-  platform: linux
+  constrains:
+  - sysroot_linux-64 >=2.17
   license: Apache-2.0 WITH LLVM-exception
   license_family: Apache
-  size: 1447348
-  timestamp: 1686896650992
+  size: 1708599
+  timestamp: 1715019863910
 - kind: conda
   name: libcxxabi
-  version: 16.0.6
+  version: 17.0.6
   build: ha770c72_0
   subdir: linux-64
-  url: https://conda.anaconda.org/conda-forge/linux-64/libcxxabi-16.0.6-ha770c72_0.conda
-  sha256: b76e2d8108b8d87211a9035b14b3d2bd3a547ae08002a3b65a8aaa79dd93bb4c
-  md5: 1a67947882662a3d65bce90afbe922aa
+  url: https://conda.anaconda.org/conda-forge/linux-64/libcxxabi-17.0.6-ha770c72_0.conda
+  sha256: d1dccf8346046ebabbfa3ac44c3716ebdfef65726264fcb70cfa4dd60e984020
+  md5: 9c7315642cf1cb6894a1e12917d44494
   constrains:
-  - libcxx 16.0.6.*
-  arch: x86_64
-  platform: linux
+  - libcxx 17.0.6.*
   license: Apache-2.0 WITH LLVM-exception
   license_family: Apache
-  size: 157413
-  timestamp: 1686896641895
+  size: 146075
+  timestamp: 1715019841047
 - kind: conda
   name: libedit
   version: 3.1.20191231
@@ -1235,22 +1249,23 @@ packages:
   timestamp: 1620240338595
 - kind: conda
   name: sysroot_linux-64
-  version: '2.12'
-  build: he073ed8_16
-  build_number: 16
-  subdir: linux-64
+  version: '2.28'
+  build: he073ed8_2
+  build_number: 2
+  subdir: noarch
   noarch: generic
-  url: https://conda.anaconda.org/conda-forge/noarch/sysroot_linux-64-2.12-he073ed8_16.conda
-  sha256: 4c024b2eee24c6da7d3e08723111ec02665c578844c5b3e9e6b38f89000bec41
-  md5: 071ea8dceff4d30ac511f4a2f8437cd1
+  url: https://conda.anaconda.org/conda-forge/noarch/sysroot_linux-64-2.28-he073ed8_2.conda
+  sha256: 4d22ee85398cef1da379ef913a6232bafc0c412b1b4ce8ed9c5fd9d8c6d9d3a8
+  md5: 32efe63453c3561a03e915a7829c2bb1
   depends:
-  - kernel-headers_linux-64 2.6.32 he073ed8_16
-  arch: x86_64
-  platform: linux
+  - _sysroot_linux-64_curr_repodata_hack 3.*
+  - kernel-headers_linux-64 4.18.0 he073ed8_2
+  track_features:
+  - sysroot_linux-64_2.28 sysroot_linux-64_2.28_feature_2
   license: LGPL-2.0-or-later AND LGPL-2.0-or-later WITH exceptions AND GPL-2.0-or-later AND MPL-2.0
   license_family: GPL
-  size: 15277813
-  timestamp: 1689214980563
+  size: 26421592
+  timestamp: 1711086612058
 - kind: conda
   name: tk
   version: 8.6.13
