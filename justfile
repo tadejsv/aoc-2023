@@ -16,6 +16,8 @@ install-eigen:
 	cd external/eigen && rm -rf build && cmake -G Ninja -S . -B build \
 		-DCMAKE_INSTALL_PREFIX=../installed \
 		-DCMAKE_TOOLCHAIN_FILE=../../toolchain/Clang.cmake \
+		-DEIGEN_BUILD_BLAS=OFF \
+		-DEIGEN_BUILD_LAPACK=OFF \
 		-DCMAKE_BUILD_TYPE=Release && \
 	cmake --build build --target install && rm -rf build
 
