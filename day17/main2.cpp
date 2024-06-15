@@ -25,8 +25,9 @@ struct Position {
 };
 
 struct PositionHash {
-    auto operator()(const Position &p) const -> std::size_t {         // NOLINT
-        return (p.row << 20) | (p.col << 8) | (p.steps << 2) | p.dir; // NOLINT
+    auto operator()(const Position &p) const -> std::size_t {       // NOLINT
+        return static_cast<std::size_t>(                            // NOLINT
+            (p.row << 20) | (p.col << 8) | (p.steps << 2) | p.dir); // NOLINT
     }
 };
 
