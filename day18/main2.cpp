@@ -41,7 +41,7 @@ int main() // NOLINT
         const auto line_parts = utils::split_string(line, ' ');
 
         const auto steps = std::stol(line_parts[2].substr(2, 5), nullptr, 16);
-        const auto direction = std::stoi(line_parts[2].substr(7, 1));
+        const auto direction = line_parts[2][7] - '0';
 
         if (direction == 0) {
             current.x += steps;
