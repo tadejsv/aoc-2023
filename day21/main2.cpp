@@ -151,9 +151,11 @@ main() {  // NOLINT
     const auto lines = utils::read_lines_from_file("input.txt");
 
     // Sides are equal - we are operating with squares
-    const Eigen::Index N{ static_cast<Eigen::Index>(lines.size()) };
-    const Eigen::Index R{ static_cast<Eigen::Index>(std::ceil(static_cast<double>(N) / 2)) };
-    std::cout << N << " " << R << "\n";
+    const Eigen::Index N{ static_cast<Eigen::Index>(lines.size()  // NOLINT(readability-identifier-length)
+    ) };
+    const Eigen::Index R{ static_cast<Eigen::Index>(  // NOLINT(readability-identifier-length)
+        std::ceil(static_cast<double>(N) / 2)
+    ) };
     Eigen::MatrixXi board = Eigen::MatrixXi::Zero(N, N);
     for (Eigen::Index i{ 0 }; i < N; ++i) {
         for (Eigen::Index j{ 0 }; j < N; ++j) {
@@ -196,7 +198,7 @@ main() {  // NOLINT
                     continue;
                 }
                 const auto parity{ dist % 2 };
-                const auto U{ static_cast<long>(
+                const auto U{ static_cast<long>(  // NOLINT(readability-identifier-length)
                     std::floor(static_cast<double>(STEPS - R - dist) / static_cast<double>(N))
                 ) };
 
@@ -227,15 +229,19 @@ main() {  // NOLINT
                 }
 
                 const auto parity{ dist % 2 };
-                const auto U{ static_cast<long>(
+                const auto U{ static_cast<long>(  // NOLINT(readability-identifier-length)
                     std::floor(static_cast<double>(STEPS - dist) / static_cast<double>(N))
                 ) };
 
                 if (parity == 0) {
-                    const auto s{ static_cast<long>(std::floor(static_cast<double>(U) / 2)) };
+                    const auto s{ static_cast<long>(  // NOLINT(readability-identifier-length)
+                        std::floor(static_cast<double>(U) / 2)
+                    ) };
                     suitable += s * (s + 1);
                 } else {
-                    const auto s{ static_cast<long>(std::floor(static_cast<double>(U + 1) / 2)) };
+                    const auto s{ static_cast<long>(  // NOLINT(readability-identifier-length)
+                        std::floor(static_cast<double>(U + 1) / 2)
+                    ) };
                     suitable += s * s;
                 }
             }
@@ -250,11 +256,3 @@ main() {  // NOLINT
     std::cout << "Time taken: " << ms_int << " \n";
     return 0;
 };
-
-// 608603023105276
-// 608603023105276
-//      6016806405
-
-
-// my:   308446
-// good: 308625
