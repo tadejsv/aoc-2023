@@ -1,6 +1,5 @@
 // I'll be honest - the solution to this task was "inspired" by some solutions I found
 // online :)
-#include "utils/utils.h"
 #include <iostream>
 #include <memory>
 #include <numeric>
@@ -12,35 +11,41 @@
 #include <unordered_set>
 #include <vector>
 
+#include "utils/utils.h"
+
 enum Signal { Low, High };
 
 struct Pulse {
     std::string from;
     std::string to;
-    Signal signal{Low};
+    Signal signal{ Low };
 };
 
 class Node {
-  public:
-    bool on{false};
+public:
+
+    bool on{ false };
     std::vector<std::string> connections{};
 
-    Node(const std::vector<std::string> &conns) : connections{conns} {};
+    Node(const std::vector<std::string>& conns)
+        : connections{ conns } {};
 
-    virtual auto apply(const Pulse &pulse) -> std::vector<Pulse> = 0;
+    virtual auto apply(const Pulse& pulse) -> std::vector<Pulse> = 0;
 
     virtual ~Node() = default;
-    Node(const Node &) = default;
-    auto operator=(const Node &) -> Node & = default;
-    Node(Node &&) noexcept = default;
-    auto operator=(Node &&) noexcept -> Node & = default;
+    Node(const Node&) = default;
+    auto operator=(const Node&) -> Node& = default;
+    Node(Node&&) noexcept = default;
+    auto operator=(Node&&) noexcept -> Node& = default;
 };
 
 class FlipFlop : public Node {
-  public:
-    FlipFlop(const std::vector<std::string> &connections) : Node{connections} {};
+public:
 
-    auto apply(const Pulse &pulse) -> std::vector<Pulse> override {
+    FlipFlop(const std::vector<std::string>& connections)
+        : Node{ connections } {};
+
+    auto apply(const Pulse& pulse) -> std::vector<Pulse> override {
         if (pulse.signal == High) {
             return {};
         }
@@ -49,7 +54,7 @@ class FlipFlop : public Node {
         pulses.reserve(connections.size());
         const auto signal = on ? Low : High;
 
-        for (auto const &conn : connections) {
+        for (const auto& conn : connections) {
             pulses.emplace_back(pulse.to, conn, signal);
         }
         on = !on;
@@ -59,15 +64,16 @@ class FlipFlop : public Node {
 };
 
 class Conjunction : public Node {
+public:
 
-  public:
     std::unordered_map<std::string, Signal> last_received{};
-    Conjunction(const std::vector<std::string> &connections) : Node{connections} {};
+    Conjunction(const std::vector<std::string>& connections)
+        : Node{ connections } {};
 
-    auto apply(const Pulse &pulse) -> std::vector<Pulse> override {
+    auto apply(const Pulse& pulse) -> std::vector<Pulse> override {
         last_received[pulse.from] = pulse.signal;
-        Signal signal{Low};
-        for (const auto &[nn, value] : last_received) {
+        Signal signal{ Low };
+        for (const auto& [nn, value] : last_received) {
             if (value == Low) {
                 signal = High;
                 break;
@@ -76,7 +82,7 @@ class Conjunction : public Node {
 
         std::vector<Pulse> pulses{};
         pulses.reserve(connections.size());
-        for (auto const &conn : connections) {
+        for (const auto& conn : connections) {
             pulses.emplace_back(pulse.to, conn, signal);
         }
 
@@ -85,13 +91,15 @@ class Conjunction : public Node {
 };
 
 class Broadcaster : public Node {
-  public:
-    Broadcaster(const std::vector<std::string> &connections) : Node{connections} {};
+public:
 
-    auto apply(const Pulse &pulse) -> std::vector<Pulse> override {
+    Broadcaster(const std::vector<std::string>& connections)
+        : Node{ connections } {};
+
+    auto apply(const Pulse& pulse) -> std::vector<Pulse> override {
         std::vector<Pulse> pulses{};
         pulses.reserve(connections.size());
-        for (auto const &conn : connections) {
+        for (const auto& conn : connections) {
             pulses.emplace_back(pulse.to, conn, pulse.signal);
         }
 
@@ -99,24 +107,24 @@ class Broadcaster : public Node {
     };
 };
 
-constexpr int NUM_LOOPS{5000};
+constexpr int NUM_LOOPS{ 5000 };
 
-int main() // NOLINT
+int
+main()  // NOLINT
 {
     const auto lines = utils::read_lines_from_file("input.txt");
 
     std::unordered_set<std::string> inverters{};
     std::unordered_map<std::string, std::unique_ptr<Node>> nodes{};
-    for (const auto &line : lines) {
-        const auto parts{utils::split_string(line, '-')};
-        const auto identifier{parts[0][0]};
-        auto name{parts[0].substr(1, parts[0].size() - 2)};
+    for (const auto& line : lines) {
+        const auto parts{ utils::split_string(line, '-') };
+        const auto identifier{ parts[0][0] };
+        auto name{ parts[0].substr(1, parts[0].size() - 2) };
 
-        const auto conns_strs{
-            utils::split_string(parts[1].substr(1, parts[1].size() - 1), ',')};
+        const auto conns_strs{ utils::split_string(parts[1].substr(1, parts[1].size() - 1), ',') };
         std::vector<std::string> conns{};
         conns.reserve(conns_strs.size());
-        for (const auto &conn_str : conns_strs) {
+        for (const auto& conn_str : conns_strs) {
             conns.push_back(conn_str.substr(1, conn_str.size() - 1));
         }
 
@@ -132,20 +140,20 @@ int main() // NOLINT
     }
 
     // Second pass for inverter modules
-    for (const auto &[name, node] : nodes) {
-        for (const auto &conn_node : node->connections) {
+    for (const auto& [name, node] : nodes) {
+        for (const auto& conn_node : node->connections) {
             if (inverters.contains(conn_node)) {
-                auto *const node = dynamic_cast<Conjunction *>(nodes[conn_node].get());
+                auto* const node = dynamic_cast<Conjunction*>(nodes[conn_node].get());
                 node->last_received[name] = Low;
             }
         }
     }
 
     // Get the node (inverter) connected to rx
-    const std::string TARGET{"rx"};
+    const std::string TARGET{ "rx" };
     std::string rx_feed{};
-    for (const auto &[name, node] : nodes) {
-        for (const auto &conn_node : node->connections) {
+    for (const auto& [name, node] : nodes) {
+        for (const auto& conn_node : node->connections) {
             if (conn_node == TARGET) {
                 rx_feed = name;
             }
@@ -154,8 +162,8 @@ int main() // NOLINT
 
     // Get the nodes (inverters) connected to rx feed
     std::unordered_map<std::string, int> final_inverter_periods{};
-    for (const auto &[name, node] : nodes) {
-        for (const auto &conn_node : node->connections) {
+    for (const auto& [name, node] : nodes) {
+        for (const auto& conn_node : node->connections) {
             if (conn_node == rx_feed) {
                 final_inverter_periods[name] = -1;
             }
@@ -163,13 +171,13 @@ int main() // NOLINT
     }
 
     std::queue<Pulse> pulses{};
-    for (int i{0}; i < NUM_LOOPS; ++i) {
+    for (int i{ 0 }; i < NUM_LOOPS; ++i) {
         pulses.emplace("button", "broadcaster", Low);
         while (!pulses.empty()) {
-            const auto &pulse = pulses.front();
+            const auto& pulse = pulses.front();
 
-            if (pulse.signal == High && final_inverter_periods.contains(pulse.from) &&
-                final_inverter_periods[pulse.from] < 0) {
+            if (pulse.signal == High && final_inverter_periods.contains(pulse.from)
+                && final_inverter_periods[pulse.from] < 0) {
                 final_inverter_periods[pulse.from] = i + 1;
             }
 
@@ -178,7 +186,7 @@ int main() // NOLINT
                 continue;
             }
 
-            for (const auto &pulse : nodes[pulse.to]->apply(pulse)) {
+            for (const auto& pulse : nodes[pulse.to]->apply(pulse)) {
                 pulses.push(pulse);
             };
 
@@ -186,8 +194,8 @@ int main() // NOLINT
         }
     }
 
-    long long lcm{1};
-    for (const auto &[k, v] : final_inverter_periods) {
+    long long lcm{ 1 };
+    for (const auto& [k, v] : final_inverter_periods) {
         lcm = std::lcm(lcm, v);
         std::cout << k << " " << v << "\n";
     }

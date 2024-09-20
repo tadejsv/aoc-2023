@@ -1,9 +1,10 @@
-#include "utils/utils.h"
 #include <algorithm>
 #include <iostream>
 #include <string>
 #include <string_view>
 #include <vector>
+
+#include "utils/utils.h"
 
 struct RangeIndex {
     long long key_start;
@@ -12,15 +13,18 @@ struct RangeIndex {
 };
 
 class RangeMap {
-  private:
+private:
+
     std::vector<RangeIndex> ranges;
 
-  public:
-    auto add_range(const RangeIndex &range_index) -> void {
+public:
+
+    auto add_range(const RangeIndex& range_index) -> void {
         ranges.push_back(range_index);
     };
+
     auto find(const long long key) -> long long {
-        for (auto const &index : ranges) {
+        for (const auto& index : ranges) {
             if (key >= index.key_start && key < index.key_start + index.length) {
                 return index.val_start + (key - index.key_start);
             }
@@ -30,7 +34,8 @@ class RangeMap {
     };
 };
 
-int main() { // NOLINT
+int
+main() {  // NOLINT
     const auto lines = utils::read_lines_from_file("input.txt");
 
     std::vector<long long> seeds;
@@ -42,15 +47,15 @@ int main() { // NOLINT
     RangeMap temperature2humidty;
     RangeMap humidty2location;
 
-    RangeMap *current_range_map{nullptr};
+    RangeMap* current_range_map{ nullptr };
 
-    for (size_t i{0}; i < lines.size(); ++i) {
-        const auto &line{lines.at(i)};
+    for (size_t i{ 0 }; i < lines.size(); ++i) {
+        const auto& line{ lines.at(i) };
         if (line.contains("seeds:")) {
             const auto name_seeds = utils::split_string(line, ':');
             const auto seeds_str = utils::split_string(name_seeds.at(1), ' ');
 
-            for (const auto &seed_str : seeds_str) {
+            for (const auto& seed_str : seeds_str) {
                 seeds.push_back(std::stoll(seed_str));
             }
         } else if (line.size() < 3) {
@@ -69,13 +74,12 @@ int main() { // NOLINT
             current_range_map = &temperature2humidty;
         } else if (line.contains("humidity-to-location map:")) {
             current_range_map = &humidty2location;
-        } else { // Assuming we have a row of 3 numbers
-            auto const numbers_str = utils::split_string(line, ' ');
+        } else {  // Assuming we have a row of 3 numbers
+            const auto numbers_str = utils::split_string(line, ' ');
             if (current_range_map != nullptr) {
-                current_range_map->add_range(
-                    RangeIndex{.key_start = std::stoll(numbers_str.at(1)),
-                        .val_start = std::stoll(numbers_str.at(0)),
-                        .length = std::stoll(numbers_str.at(2))});
+                current_range_map->add_range(RangeIndex{ .key_start = std::stoll(numbers_str.at(1)),
+                                                         .val_start = std::stoll(numbers_str.at(0)),
+                                                         .length = std::stoll(numbers_str.at(2)) });
             } else {
                 std::cout << "oh no";
             }
@@ -86,20 +90,20 @@ int main() { // NOLINT
 
     std::vector<long long> locations;
     for (auto seed : seeds) {
-        auto const soil = seed2soil.find(seed);
-        auto const fertilizer = soil2fertilizer.find(soil);
-        auto const water = fertilizer2water.find(fertilizer);
-        auto const light = water2light.find(water);
-        auto const temperature = light2temperature.find(light);
-        auto const humidity = temperature2humidty.find(temperature);
-        auto const location = humidty2location.find(humidity);
+        const auto soil = seed2soil.find(seed);
+        const auto fertilizer = soil2fertilizer.find(soil);
+        const auto water = fertilizer2water.find(fertilizer);
+        const auto light = water2light.find(water);
+        const auto temperature = light2temperature.find(light);
+        const auto humidity = temperature2humidty.find(temperature);
+        const auto location = humidty2location.find(humidity);
 
         locations.push_back(location);
     }
     auto min_el = *std::ranges::min_element(locations);
 
-    constexpr double mus_in_s{1000000};
-    double time_elapsed{timer.elapsed() * mus_in_s / static_cast<double>(seeds.size())};
+    constexpr double mus_in_s{ 1000000 };
+    double time_elapsed{ timer.elapsed() * mus_in_s / static_cast<double>(seeds.size()) };
     std::cout << "Time elapsed: " << time_elapsed << " μs\n";
     std::cout << min_el << " ";
 

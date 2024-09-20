@@ -11,15 +11,17 @@ struct GameMax {
     int green;
 };
 
-auto get_game_num(const std::string &game_num_part) -> int {
+auto
+get_game_num(const std::string& game_num_part) -> int {
     return std::stoi(utils::split_string(game_num_part, ' ').at(1));
 }
 
-auto get_game_max(const std::vector<std::string> &iters) -> GameMax {
-    auto game_max = GameMax{0, 0, 0};
+auto
+get_game_max(const std::vector<std::string>& iters) -> GameMax {
+    auto game_max = GameMax{ 0, 0, 0 };
 
-    for (const auto &iter : iters) {
-        for (const auto &dice : utils::split_string(iter, ',')) {
+    for (const auto& iter : iters) {
+        for (const auto& dice : utils::split_string(iter, ',')) {
             auto num_color = utils::split_string(dice, ' ');
             auto num = std::stoi(num_color.at(0));
             auto color = num_color.at(1);
@@ -37,12 +39,13 @@ auto get_game_max(const std::vector<std::string> &iters) -> GameMax {
     return game_max;
 }
 
-int main() { // NOLINT
-    const std::string fname{"../../day2/input.txt"};
+int
+main() {  // NOLINT
+    const std::string fname{ "../../day2/input.txt" };
 
     std::unordered_map<int, GameMax> games;
 
-    for (const auto &line : utils::read_lines_from_file(fname)) {
+    for (const auto& line : utils::read_lines_from_file(fname)) {
         const auto name_iters_split = utils::split_string(line, ':');
         const auto game_num = get_game_num(name_iters_split.at(0));
 
@@ -50,8 +53,8 @@ int main() { // NOLINT
         games[game_num] = get_game_max(iters);
     }
 
-    int sum_power{0};
-    for (const auto &num_game_pair : games) {
+    int sum_power{ 0 };
+    for (const auto& num_game_pair : games) {
         auto game = num_game_pair.second;
         sum_power += game.red * game.blue * game.green;
     }

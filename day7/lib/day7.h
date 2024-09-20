@@ -5,10 +5,11 @@
 #include <cstddef>
 #include <string_view>
 
-constexpr std::size_t NUM_CARDS{5};
+constexpr std::size_t NUM_CARDS{ 5 };
 
 class Hand {
-  public:
+public:
+
     int strength;
     std::array<char, NUM_CARDS> characters;
 
@@ -16,7 +17,8 @@ class Hand {
 };
 
 class JHand {
-  public:
+public:
+
     int strength;
     std::array<char, NUM_CARDS> characters;
 
@@ -24,7 +26,9 @@ class JHand {
 };
 
 // False if first hands is stronger, true if second one is, false on ties
-auto compare_hands(const Hand &hand1, const Hand &hand2) -> bool;
-auto compare_jhands(const JHand &hand1, const JHand &hand2) -> bool;
+auto
+compare_hands(const Hand& hand1, const Hand& hand2) -> bool;
+auto
+compare_jhands(const JHand& hand1, const JHand& hand2) -> bool;
 
-#endif // DAY7_H
+#endif  // DAY7_H

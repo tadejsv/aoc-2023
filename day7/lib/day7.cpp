@@ -1,4 +1,3 @@
-#include "day7.h"
 #include <algorithm>
 #include <array>
 #include <cstddef>
@@ -6,55 +5,39 @@
 #include <unordered_map>
 #include <vector>
 
-static const std::unordered_map<char, int> card_strength = {{'A', 14},
-    {'K', 13},
-    {'Q', 12},
-    {'J', 11},
-    {'T', 10},
-    {'9', 9},
-    {'8', 8},
-    {'7', 7},
-    {'6', 6},
-    {'5', 5},
-    {'4', 4},
-    {'3', 3},
-    {'2', 2}};
+#include "day7.h"
 
-static const char JOKER{'J'};
-static const std::unordered_map<char, int> jcard_strength = {{'A', 14},
-    {'K', 13},
-    {'Q', 12},
-    {'T', 10},
-    {'9', 9},
-    {'8', 8},
-    {'7', 7},
-    {'6', 6},
-    {'5', 5},
-    {'4', 4},
-    {'3', 3},
-    {'2', 2},
-    {'J', 1}};
+static const std::unordered_map<char, int> card_strength = {
+    { 'A', 14 }, { 'K', 13 }, { 'Q', 12 }, { 'J', 11 }, { 'T', 10 }, { '9', 9 }, { '8', 8 },
+    { '7', 7 },  { '6', 6 },  { '5', 5 },  { '4', 4 },  { '3', 3 },  { '2', 2 }
+};
 
-Hand::Hand(std::string_view hand) { // NOLINT(cppcoreguidelines-pro-type-member-init)
+static const char JOKER{ 'J' };
+static const std::unordered_map<char, int> jcard_strength = {
+    { 'A', 14 }, { 'K', 13 }, { 'Q', 12 }, { 'T', 10 }, { '9', 9 }, { '8', 8 }, { '7', 7 },
+    { '6', 6 },  { '5', 5 },  { '4', 4 },  { '3', 3 },  { '2', 2 }, { 'J', 1 }
+};
+
+Hand::Hand(std::string_view hand) {  // NOLINT(cppcoreguidelines-pro-type-member-init)
     std::unordered_map<char, int> counts_map;
-    for (std::size_t i{0}; i < hand.size(); ++i) {
+    for (std::size_t i{ 0 }; i < hand.size(); ++i) {
         characters.at(i) = hand[i];
         counts_map[hand[i]]++;
     }
 
     std::vector<int> counts;
     counts.reserve(counts_map.size());
-    for (const auto &pair : counts_map) {
+    for (const auto& pair : counts_map) {
         counts.push_back(pair.second);
     }
 
     // Sorts in descending order
     std::sort(counts.begin(), counts.end(), std::greater<>());
 
-    if (counts[0] == 5) { // NOLINT
-        strength = 6;     // NOLINT
+    if (counts[0] == 5) {  // NOLINT
+        strength = 6;      // NOLINT
     } else if (counts[0] == 4) {
-        strength = 5; // NOLINT
+        strength = 5;  // NOLINT
     } else if (counts[0] == 3 && counts[1] == 2) {
         strength = 4;
     } else if (counts[0] == 3 && counts[1] == 1) {
@@ -68,7 +51,8 @@ Hand::Hand(std::string_view hand) { // NOLINT(cppcoreguidelines-pro-type-member-
     }
 };
 
-auto compare_hands(const Hand &hand1, const Hand &hand2) -> bool {
+auto
+compare_hands(const Hand& hand1, const Hand& hand2) -> bool {
     if (hand1.strength < hand2.strength) {
         return true;
     }
@@ -77,7 +61,7 @@ auto compare_hands(const Hand &hand1, const Hand &hand2) -> bool {
         return false;
     }
 
-    for (std::size_t i{0}; i < NUM_CARDS; i++) {
+    for (std::size_t i{ 0 }; i < NUM_CARDS; i++) {
         const auto char1 = hand1.characters.at(i);
         const auto char2 = hand2.characters.at(i);
 
@@ -92,16 +76,16 @@ auto compare_hands(const Hand &hand1, const Hand &hand2) -> bool {
     return false;
 };
 
-JHand::JHand(std::string_view hand) { // NOLINT(cppcoreguidelines-pro-type-member-init)
+JHand::JHand(std::string_view hand) {  // NOLINT(cppcoreguidelines-pro-type-member-init)
     std::unordered_map<char, int> counts_map;
-    for (std::size_t i{0}; i < hand.size(); ++i) {
+    for (std::size_t i{ 0 }; i < hand.size(); ++i) {
         characters.at(i) = hand[i];
         counts_map[hand[i]]++;
     }
 
     // Find number of J cards, add to the other most common one
-    std::pair<char, int> most_common{'-', 0};
-    for (auto &element : counts_map) {
+    std::pair<char, int> most_common{ '-', 0 };
+    for (auto& element : counts_map) {
         if (element.second > most_common.second && element.first != JOKER) {
             most_common = std::make_pair(element.first, element.second);
         }
@@ -113,17 +97,17 @@ JHand::JHand(std::string_view hand) { // NOLINT(cppcoreguidelines-pro-type-membe
 
     std::vector<int> counts;
     counts.reserve(counts_map.size());
-    for (const auto &pair : counts_map) {
+    for (const auto& pair : counts_map) {
         counts.push_back(pair.second);
     }
 
     // Sorts in descending order
     std::sort(counts.begin(), counts.end(), std::greater<>());
 
-    if (counts[0] == 5) { // NOLINT
-        strength = 6;     // NOLINT
+    if (counts[0] == 5) {  // NOLINT
+        strength = 6;      // NOLINT
     } else if (counts[0] == 4) {
-        strength = 5; // NOLINT
+        strength = 5;  // NOLINT
     } else if (counts[0] == 3 && counts[1] == 2) {
         strength = 4;
     } else if (counts[0] == 3 && counts[1] == 1) {
@@ -137,7 +121,8 @@ JHand::JHand(std::string_view hand) { // NOLINT(cppcoreguidelines-pro-type-membe
     }
 };
 
-auto compare_jhands(const JHand &hand1, const JHand &hand2) -> bool {
+auto
+compare_jhands(const JHand& hand1, const JHand& hand2) -> bool {
     if (hand1.strength < hand2.strength) {
         return true;
     }
@@ -146,7 +131,7 @@ auto compare_jhands(const JHand &hand1, const JHand &hand2) -> bool {
         return false;
     }
 
-    for (std::size_t i{0}; i < NUM_CARDS; i++) {
+    for (std::size_t i{ 0 }; i < NUM_CARDS; i++) {
         const auto char1 = hand1.characters.at(i);
         const auto char2 = hand2.characters.at(i);
 
