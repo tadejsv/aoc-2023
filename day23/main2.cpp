@@ -1,4 +1,4 @@
-// This runs relatively fase (sub 1 second), but I could probably add more optimizations in the path
+// This runs relatively fast (sub 1 second), but I could probably add more optimizations in the path
 // searching part - heuristics to early terminate some unfeasible paths.
 #include <algorithm>
 #include <Eigen/Dense>
@@ -42,8 +42,8 @@ struct TraverseIndex {
 
 struct PathIndex {
     unsigned long visited{ 0 };
-    std::size_t current_node_ind;
-    int dist;
+    std::size_t current_node_ind{ 0 };
+    int dist{ 0 };
 };
 
 int
@@ -115,14 +115,12 @@ main() {  // NOLINT
 
         // If the cell is a node
         if (int(left_ok) + int(right_ok) + int(up_ok) + int(down_ok) > 1) {
+            // index be correct even if node does not exist, as we will add it at the end
             const auto curr_node_iter = std::find(nodes.begin(), nodes.end(), current_cell.current_pos);
-            const bool node_exists{ curr_node_iter != nodes.end() };
-
-            // will be correct even if node does not exist
             const auto curr_node_ind{ static_cast<std::size_t>(curr_node_iter - nodes.begin()) };
 
             graph[last_node_ind].emplace(curr_node_ind, dist);
-            if (node_exists) {
+            if (curr_node_iter != nodes.end()) {  // node exists
                 graph[curr_node_ind].emplace(last_node_ind, dist);
                 continue;
             }
