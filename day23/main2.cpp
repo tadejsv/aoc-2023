@@ -13,17 +13,13 @@
 
 #include "utils/utils.h"
 
-enum Tile : int {
-    Path = 0,
-    Forest = 1,
-    Slope = 2,
-};
+enum Tile : int { Path = 0, Forest = 1, Slope = 2 };
 
 enum Direction : int { Down = 0, Up = 1, Left = 2, Right = 3 };
 
 using Node = std::pair<int, int>;  // row and column
 
-using Neighbor = std::pair<std::size_t, int>;  // Node and distance
+using Neighbor = std::pair<std::size_t, int>;  // Node ind and distance
 
 struct NeighborEqual {
     auto operator()(const Neighbor& lhs, const Neighbor& rhs) const -> bool {
@@ -39,15 +35,15 @@ struct NeighborHash {
 
 struct TraverseIndex {
     Node current_pos;
-    std::size_t last_node;
-    int current_dist;
+    std::size_t last_node_ind;
+    int dist;
     Direction came_from;
 };
 
 struct PathIndex {
-    unsigned long long visited{ 0 };
-    std::size_t current_node;
-    int current_dist;
+    unsigned long visited{ 0 };
+    std::size_t current_node_ind;
+    int dist;
 };
 
 int
@@ -97,74 +93,63 @@ main() {  // NOLINT
     queue.emplace(Node{ 1, 1 }, 0, 1, Up);
     graph[0] = {};
 
-    while (!queue.empty()) {
+    for (; !queue.empty(); queue.pop()) {
         const auto current_cell{ queue.front() };
-        queue.pop();
-
-        const auto& current_pos{ current_cell.current_pos };
+        const auto [cur_row, cur_col] = current_cell.current_pos;
         const auto came_from{ current_cell.came_from };
-        auto last_node{ current_cell.last_node };
-        auto current_dist{ current_cell.current_dist };
+        auto last_node_ind{ current_cell.last_node_ind };
+        auto dist{ current_cell.dist };
 
         // We have reached final node
-        if (current_pos.first == map.rows() - 1) {
-            nodes.push_back(current_pos);
+        if (cur_row == map.rows() - 1) {
+            nodes.emplace_back(cur_row, cur_col);
             final_node_ind = nodes.size() - 1;
-            graph[last_node].emplace(final_node_ind, current_dist);
+            graph[last_node_ind].emplace(final_node_ind, dist);
             continue;
         }
 
-        int left_ok{ static_cast<int>(
-            map(current_pos.first, current_pos.second - 1) != Forest && came_from != Left
-        ) };
-        int rigt_ok{ static_cast<int>(
-            map(current_pos.first, current_pos.second + 1) != Forest && came_from != Right
-        ) };
-        int up_ok{ static_cast<int>(
-            map(current_pos.first - 1, current_pos.second) != Forest && came_from != Up
-        ) };
-        int down_ok{ static_cast<int>(
-            map(current_pos.first + 1, current_pos.second) != Forest && came_from != Down
-        ) };
+        bool left_ok{ map(cur_row, cur_col - 1) != Forest && came_from != Left };
+        bool right_ok{ map(cur_row, cur_col + 1) != Forest && came_from != Right };
+        bool up_ok{ map(cur_row - 1, cur_col) != Forest && came_from != Up };
+        bool down_ok{ map(cur_row + 1, cur_col) != Forest && came_from != Down };
 
         // If the cell is a node
-        if (left_ok + rigt_ok + up_ok + down_ok > 1) {
-            const auto curr_node_iter = std::find(nodes.begin(), nodes.end(), current_pos);
+        if (int(left_ok) + int(right_ok) + int(up_ok) + int(down_ok) > 1) {
+            const auto curr_node_iter = std::find(nodes.begin(), nodes.end(), current_cell.current_pos);
             const bool node_exists{ curr_node_iter != nodes.end() };
 
             // will be correct even if node does not exist
             const auto curr_node_ind{ static_cast<std::size_t>(curr_node_iter - nodes.begin()) };
 
-            graph[last_node].emplace(curr_node_ind, current_dist);
+            graph[last_node_ind].emplace(curr_node_ind, dist);
             if (node_exists) {
-                graph[curr_node_ind].emplace(last_node, current_dist);
+                graph[curr_node_ind].emplace(last_node_ind, dist);
                 continue;
             }
 
-            nodes.push_back(current_pos);
+            nodes.push_back(current_cell.current_pos);
             graph[curr_node_ind] = {};
-            graph[curr_node_ind].emplace(last_node, current_dist);
+            graph[curr_node_ind].emplace(last_node_ind, dist);
 
-            last_node = curr_node_ind;
-            current_dist = 0;
+            last_node_ind = curr_node_ind;
+            dist = 0;
         }
 
-        Node next_node;
-        next_node = Node{ current_pos.first, current_pos.second - 1 };
-        if (static_cast<bool>(left_ok)) {
-            queue.emplace(next_node, last_node, current_dist + 1, Right);
+
+        auto enqueue_node = [&](int d_row, int d_col, Direction came_from) {
+            queue.emplace(Node{ cur_row + d_row, cur_col + d_col }, last_node_ind, dist + 1, came_from);
+        };
+        if (left_ok) {
+            enqueue_node(0, -1, Right);
         }
-        next_node = Node{ current_pos.first, current_pos.second + 1 };
-        if (static_cast<bool>(rigt_ok)) {
-            queue.emplace(next_node, last_node, current_dist + 1, Left);
+        if (right_ok) {
+            enqueue_node(0, 1, Left);
         }
-        next_node = Node{ current_pos.first - 1, current_pos.second };
-        if (static_cast<bool>(up_ok)) {
-            queue.emplace(next_node, last_node, current_dist + 1, Down);
+        if (up_ok) {
+            enqueue_node(-1, 0, Down);
         }
-        next_node = Node{ current_pos.first + 1, current_pos.second };
-        if (static_cast<bool>(down_ok)) {
-            queue.emplace(next_node, last_node, current_dist + 1, Up);
+        if (down_ok) {
+            enqueue_node(1, 0, Up);
         }
     }
 
@@ -173,22 +158,17 @@ main() {  // NOLINT
     path_queue.emplace(1, 0, 0);
 
     int max_len{ 0 };
-    PathIndex max_path{};
-    while (!path_queue.empty()) {
-        const auto current_cell{ path_queue.front() };
-        path_queue.pop();
-        if (current_cell.current_node == final_node_ind) {
-            max_len = std::max(max_len, current_cell.current_dist);
-            if (max_len == current_cell.current_dist) {
-                max_path = current_cell;
-            }
+    for (; !path_queue.empty(); path_queue.pop()) {
+        const auto& [current_visited, current_node_ind, dist] = path_queue.front();
+        if (current_node_ind == final_node_ind) {
+            max_len = std::max(max_len, dist);
             continue;
         }
 
-        for (const auto& neighbor : graph[current_cell.current_node]) {
-            if ((current_cell.visited & (1ULL << (neighbor.first + 1))) == 0) {
-                const auto visited{ current_cell.visited | (1ULL << (neighbor.first + 1)) };
-                path_queue.emplace(visited, neighbor.first, current_cell.current_dist + neighbor.second);
+        for (const auto& [neighbor_node, neighbor_dist] : graph[current_node_ind]) {
+            if ((current_visited & (1ULL << (neighbor_node + 1))) == 0) {
+                const auto visited{ current_visited | (1ULL << (neighbor_node + 1)) };
+                path_queue.emplace(visited, neighbor_node, dist + neighbor_dist);
             }
         }
     }
