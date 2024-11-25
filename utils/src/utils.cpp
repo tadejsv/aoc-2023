@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <chrono>
 #include <filesystem>  // for path
 #include <fstream>     // IWYU pragma: keep
@@ -8,6 +9,22 @@
 #include "utils/utils.h"
 
 namespace utils {
+
+    auto trim(const std::string& str) -> std::string {
+        // Find the first non-whitespace character from the beginning
+        auto start = std::find_if_not(str.begin(), str.end(), [](unsigned char chr) {
+            return std::isspace(chr);
+        });
+
+        // Find the first non-whitespace character from the end
+        auto end = std::find_if_not(str.rbegin(), str.rend(), [](unsigned char chr) {
+            return std::isspace(chr);
+        });
+
+        // Return the trimmed string
+        return (start < end.base() ? std::string(start, end.base()) : std::string());
+    }
+
     auto split_string(std::string_view str, char split_by) -> std::vector<std::string> {
         std::vector<std::string> parts;
         std::string::size_type prev_pos{ 0 };
