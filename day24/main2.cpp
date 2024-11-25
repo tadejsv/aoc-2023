@@ -29,8 +29,7 @@ struct Stone {
 };
 
 auto
-add_cross_coeffs(Eigen::Ref<Eigen::Matrix<double, 3, 3>> block, Vector3ld vec)
-    -> void {
+add_cross_coeffs(Eigen::Ref<Eigen::Matrix<double, 3, 3>> block, Vector3ld vec) -> void {
     block(0, 1) = -vec(2);
     block(0, 2) = vec(1);
     block(1, 0) = vec(2);
@@ -49,11 +48,11 @@ main() {  // NOLINT
         const auto& vparts{ utils::split_string(parts[1], ',') };
         const Stone stone{
             .p = Vector3ld{ std::stod(utils::trim(pparts[0])),
-                                  std::stod(utils::trim(pparts[1])),
-                                  std::stod(utils::trim(pparts[2])) },
+                            std::stod(utils::trim(pparts[1])),
+                            std::stod(utils::trim(pparts[2])) },
             .v = Vector3ld{ std::stod(utils::trim(vparts[0])),
-                                  std::stod(utils::trim(vparts[1])),
-                                  std::stod(utils::trim(vparts[2])) },
+                            std::stod(utils::trim(vparts[1])),
+                            std::stod(utils::trim(vparts[2])) },
         };
         stones.push_back(stone);
     }
