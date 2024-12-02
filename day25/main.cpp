@@ -1,6 +1,6 @@
-// This code uses an implementation of Stoer-Wagner algorithm for finding the minimum cut of the graph.
-// Even though I have tried to optimise it a bit (all string keys have been converted to ints),
-// it is still quite inefficient - it clocks in at about 1 minute.
+// This code uses an implementation of Stoer-Wagner algorithm for finding the minimum cut of the
+// graph. Even though I have tried to optimise it a bit (all string keys have been converted to
+// ints), it is still quite inefficient - it clocks in at about 1 minute.
 #include <iostream>
 #include <ranges>
 #include <string>
